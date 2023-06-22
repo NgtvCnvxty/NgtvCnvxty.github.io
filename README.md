@@ -3,7 +3,7 @@ Personal Webpage
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<h1>Personal Homepage</h1>
+<p>A.Douris.</p>
 </body>
 </html>
