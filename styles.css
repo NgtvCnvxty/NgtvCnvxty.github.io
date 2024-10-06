@@ -3,13 +3,13 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
 }
 
 h1 {
-    color: #35424a;
-    border-bottom: 2px solid #35424a;
+    color: rgb(51, 153, 102); /* Green title */
+    border-bottom: 2px solid rgb(232, 231, 232); /* Grey underline */
     padding-bottom: 10px;
 }
 
