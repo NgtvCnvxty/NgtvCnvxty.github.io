@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
+    line-height: 1.4;
     margin: 0;
     padding: 20px;
     background-color: #ffffff; /* White background */
@@ -23,6 +23,7 @@ ul {
 
 li {
     margin-bottom: 2px; /* Adjust space between list items */
+    padding: 0; /* Remove any default padding */
     line-height: 1.4;  /* Adjust line height to bring items closer */
 }
 
