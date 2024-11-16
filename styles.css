@@ -22,7 +22,8 @@ ul {
 }
 
 li {
-    margin-bottom: 2px;
+    margin-bottom: 2px; /* Adjust space between list items */
+    line-height: 1.4;  /* Adjust line height to bring items closer */
 }
 
 @media (max-width: 600px) {
