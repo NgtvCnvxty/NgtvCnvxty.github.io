@@ -118,8 +118,13 @@ body {
     background-color: #fafafa;
 }
 
+.pdf-section p {
+    padding-left: 1px; /* Align with PDF box border */
+}
+
 .pdf-section h3 {
     margin-top: 0; /* Remove extra space above */
+    padding-left: 1px; /* Align with PDF box border */
 }
 
 .pdf-list {
