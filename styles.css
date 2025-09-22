@@ -27,7 +27,9 @@ body {
     border-bottom: 2px solid rgb(232, 231, 232); /* Gray underline */
     padding-bottom: 10px;
     margin-bottom: 30px;
+    margin-top: 20px; /* Match content h2 positioning */
     font-size: 24px;
+    line-height: 1.4; /* Match body line-height */
 }
 
 .sidebar h1 a {
@@ -81,8 +83,9 @@ body {
     border-bottom: 2px solid rgb(232, 231, 232); /* Gray underline */
     padding-bottom: 10px;
     margin-bottom: 30px;
-    margin-top: 0; /* Align with sidebar title */
+    margin-top: 20px; /* Match sidebar title top margin */
     font-size: 24px; /* Match sidebar title size */
+    line-height: 1.4; /* Match body line-height */
     margin-left: -40px; /* Move underline to match sidebar spacing */
     padding-left: 40px; /* Add back spacing for text */
 }
