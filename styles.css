@@ -68,7 +68,7 @@ body {
 }
 
 .nav-menu a.active {
-    background-color: rgb(80, 180, 120); /* Lighter green background for distinction */
+    background-color: rgb(95, 194, 129); /* Much lighter green background for distinction */
     color: #ffffff; /* White text for active */
     font-weight: bold; /* Bold text for active button */
     border: 4px solid #ffffff; /* Thick white border */
