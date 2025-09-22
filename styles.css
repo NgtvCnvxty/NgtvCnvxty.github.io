@@ -105,6 +105,10 @@ body {
     margin-bottom: 20px;
 }
 
+.content ul.pdf-list {
+    padding-left: 0; /* Override for PDF list specifically */
+}
+
 .content li {
     margin-bottom: 8px;
     line-height: 1.4;
@@ -125,6 +129,7 @@ body {
 .pdf-list {
     list-style: none;
     padding-left: 0;
+    margin-left: 0; /* Override any inherited margin */
 }
 
 .pdf-list li {
