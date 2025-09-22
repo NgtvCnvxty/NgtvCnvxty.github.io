@@ -95,7 +95,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
 }
 
 .content {
@@ -213,7 +213,7 @@ footer {
     }
     
     .content {
-        padding: 20px 15px;
+        padding: 20px;
     }
     
     .content h2 {
@@ -221,7 +221,7 @@ footer {
     }
     
     footer {
-        padding: 20px 15px;
+        padding: 20px;
     }
 }
 
