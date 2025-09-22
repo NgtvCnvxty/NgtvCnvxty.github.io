@@ -16,19 +16,19 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Website Server"
+args = "Static Website"
 
 [[workflows.workflow]]
-name = "Website Server"
+name = "Static Website"
 author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd src && python -m http.server 5000 --bind 0.0.0.0"
+args = "cd src && python3 -m http.server 5000 --bind 0.0.0.0"
 waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
 
 [[ports]]
 localPort = 5000
