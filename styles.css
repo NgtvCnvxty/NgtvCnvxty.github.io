@@ -64,7 +64,8 @@ body {
 }
 
 .nav-menu li {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .nav-menu a {
@@ -77,10 +78,11 @@ body {
     border-radius: 5px;
     transition: background-color 0.3s;
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
     min-height: 20px;
     line-height: 1.2;
     box-sizing: border-box;
+    white-space: nowrap;
 }
 
 .nav-menu a:hover {
@@ -90,7 +92,7 @@ body {
 .nav-menu a.active {
     background-color: rgb(95, 194, 129); /* Lighter green background for distinction */
     color: #ffffff; /* White text for active */
-    font-weight: bold; /* Bold text for active button */
+    font-weight: 600; /* Same weight as normal to prevent layout shifts */
     border: 3px solid rgb(95, 194, 129); /* Green border to match background */
 }
 
@@ -211,6 +213,10 @@ footer {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 15px;
+    }
+    
+    .nav-menu a {
+        white-space: normal;
     }
     
     .nav-menu li {
