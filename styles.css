@@ -129,7 +129,7 @@ body {
 
 .pdf-list li {
     margin-bottom: 15px;
-    padding: 10px; /* Consistent padding to align with text above */
+    padding: 10px 10px 10px 0; /* Remove left padding so box edges align with text */
     background-color: #ffffff;
     border: 1px solid rgb(232, 231, 232); /* Gray border */
     border-radius: 3px;
