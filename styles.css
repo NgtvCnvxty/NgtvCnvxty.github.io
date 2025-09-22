@@ -82,8 +82,9 @@ body {
     padding-bottom: 10px;
     margin-bottom: 30px;
     margin-top: 0; /* Align with sidebar title */
-    margin-left: -20px; /* Move underline to match sidebar spacing */
-    padding-left: 20px; /* Add back spacing for text */
+    font-size: 24px; /* Match sidebar title size */
+    margin-left: -40px; /* Move underline to match sidebar spacing */
+    padding-left: 40px; /* Add back spacing for text */
 }
 
 .content h3 {
@@ -109,10 +110,14 @@ body {
 
 .pdf-section {
     margin-top: 30px;
-    padding: 20px;
+    padding: 20px 20px 20px 20px; /* Match left padding with top padding */
     border: 1px solid rgb(232, 231, 232); /* Gray border */
     border-radius: 5px;
     background-color: #fafafa;
+}
+
+.pdf-section h3 {
+    margin-top: 0; /* Remove extra space above */
 }
 
 .pdf-list {
@@ -163,6 +168,7 @@ footer {
     .content h2 {
         margin-left: 0; /* Reset on mobile */
         padding-left: 0; /* Reset on mobile */
+        font-size: 20px; /* Smaller on mobile */
     }
     
     .container {
