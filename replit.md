@@ -12,18 +12,34 @@ This is a static HTML website for SD Capital Systems Inc., a Canadian financial 
 ## Recent Changes (September 22, 2025)
 - Imported project from GitHub
 - Set up Python 3.11 environment for HTTP server
-- Configured workflow to serve static files on port 5000 with 0.0.0.0 binding
+- Transformed single-page website into professional multi-page structure
+- Implemented left-side navigation with 4 sections: Company Overview, Company Plan, Fixed Income Marketplace, Publications and Perspectives
+- Applied company branding: green RGB(51,153,102) titles, gray RGB(232,231,232) borders, black text
+- Added PDF publishing functionality to Publications section
+- Achieved pixel-perfect alignment of titles and underlines across all pages
+- Organized file structure: src/ folder for HTML/CSS, PDFs/ folder for documents
+- Configured workflow to serve from src/ directory on port 5000 with 0.0.0.0 binding
 - Configured deployment for autoscale target
-- Verified website functionality in Replit environment
 
 ## Project Structure
-- `index.html`: Main webpage with company information
-- `styles.css`: Styling for the website
-- `README.md`: Original project documentation
+```
+├── src/                          # Source files
+│   ├── index.html               # Landing page (redirects to Company Overview)
+│   ├── company-overview.html    # Company Overview page
+│   ├── company-plan.html        # Company Plan page  
+│   ├── fixed-income-marketplace.html # Fixed Income Marketplace page
+│   ├── founder-perspectives.html # Publications and Perspectives page
+│   └── styles.css               # Main stylesheet
+├── PDFs/                        # PDF documents
+│   ├── USDCAD_Forward_Rate.pdf  # Forward Exchange Rate Calculation
+│   └── Natural_Cubic_Spline_Python.pdf # Natural Cubic Spline - Python
+├── README.md                    # Original project documentation
+└── replit.md                    # Project summary and preferences
+```
 
 ## Deployment Configuration
 - Target: Autoscale (suitable for static websites)
-- Command: `python -m http.server 5000 --bind 0.0.0.0`
+- Command: `cd src && python -m http.server 5000 --bind 0.0.0.0`
 - No build step required (static files)
 
 ## User Preferences
