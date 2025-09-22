@@ -1,8 +1,8 @@
-# SD Capital Systems Inc. Website
+# Replit.md - SD Capital Systems Inc. Website
 
 ## Overview
 
-This repository contains the corporate website for SD Capital Systems Inc., a Canadian financial technology company focused on building a marketplace for fixed income securities. The website serves as a company presence with information about their business model, fixed income marketplace offerings, and founder publications. The site is a static HTML website hosted on GitHub Pages, designed to provide information about the company's focus on increasing retail access to Canadian bonds, convertible bonds, and preferred shares.
+This is a static corporate website for SD Capital Systems Inc., a Canadian financial technology company focused on building a marketplace for fixed income securities. The website serves as an informational platform showcasing the company's mission to increase retail investor access to bonds, convertible bonds, and preferred shares in the Canadian market. The site includes company information, business plans, marketplace details, and financial analysis publications.
 
 ## User Preferences
 
@@ -10,43 +10,41 @@ Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-**Frontend Architecture**
-- Static HTML website using vanilla HTML5, CSS3, and minimal JavaScript
-- Multi-page structure with consistent navigation across all pages
-- Sidebar navigation with fixed positioning for consistent user experience
-- Responsive design considerations with viewport meta tags
+### Frontend Architecture
+- **Static HTML/CSS Website**: Pure vanilla HTML5 with CSS3 styling, no JavaScript frameworks or build tools required
+- **Multi-page Structure**: Traditional server-side navigation with separate HTML files for each section
+- **Responsive Design**: Mobile-first approach with viewport meta tags and flexible layouts
+- **Component Consistency**: Shared navigation sidebar and footer across all pages with consistent styling
 
-**Site Structure**
-- Landing page (index.html) with automatic redirect to company overview
-- Four main content pages: Company Overview, Company Plan, Fixed Income Marketplace, and Publications
-- Centralized styling through a single CSS file
-- PDF document hosting for publications and analysis papers
+### Navigation and Routing
+- **Client-side Redirect**: Index page automatically redirects users to company-overview.html as the default landing page
+- **Sidebar Navigation**: Fixed-position navigation menu with active state indicators
+- **Static Routing**: Direct file-based routing with .html extensions
 
-**Navigation Design**
-- Fixed sidebar navigation for consistent access to all sections
-- Active page highlighting in navigation menu
-- Green and gray color scheme matching corporate branding
-- Clean, professional layout focused on readability
+### Content Management
+- **Static Content**: All content is hardcoded in HTML with placeholder sections for future content ([TBD] sections)
+- **PDF Integration**: External PDF documents served from a PDFs/ directory for publications and analysis
+- **External Links**: PDFs open in new tabs with security attributes (target="_blank" rel="noopener")
 
-**Content Organization**
-- Company information structured across logical sections
-- Detailed listing of fixed income securities offered in the marketplace
-- Publications section with downloadable PDF resources
-- Footer with copyright information consistent across all pages
+### Styling Architecture
+- **Single CSS File**: Centralized styles.css file with global styling rules
+- **Color Scheme**: Professional green and gray color palette with white backgrounds
+- **Typography**: Arial font family with consistent line-height of 1.4
+- **Layout System**: Flexbox-based layout with fixed sidebar and flexible content area
 
 ## External Dependencies
 
-**Hosting Platform**
-- GitHub Pages for static site hosting
-- Repository hosted at https://ngtvcnvxty.github.io/
+### Hosting Platform
+- **GitHub Pages**: Static site hosting with automatic deployment from repository
+- **Domain**: Hosted at https://ngtvcnvxty.github.io/
 
-**File Dependencies**
-- PDF documents stored in PDFs/ directory for publications
-- No external JavaScript libraries or frameworks
-- No database or backend services required
-- Self-contained CSS styling without external dependencies
+### Content Dependencies
+- **PDF Documents**: External PDF files for financial analysis and publications stored in PDFs/ directory
+- **No External APIs**: Completely self-contained static website with no external API calls
+- **No Database**: All content is static HTML with no dynamic data requirements
+- **No Authentication**: Public-facing informational website with no user accounts or login systems
 
-**Browser Compatibility**
-- Standard HTML5 and CSS3 features
-- Minimal JavaScript for page redirection
-- No external font dependencies (uses Arial system font)
+### Browser Requirements
+- **Modern HTML5 Support**: Requires browsers supporting HTML5 semantic elements and CSS3 features
+- **JavaScript Enabled**: Required for index page redirect functionality
+- **No Framework Dependencies**: Pure vanilla implementation with no external JavaScript libraries or CSS frameworks
