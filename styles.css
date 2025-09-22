@@ -6,6 +6,7 @@ body {
     padding-top: 140px; /* Space for fixed header and nav - increased to prevent overlap */
     background-color: #ffffff; /* White background */
     color: #000000; /* Black text */
+    overflow-y: scroll; /* Always show scrollbar to prevent layout shifts */
 }
 
 /* Sticky Header with Company Name */
