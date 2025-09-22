@@ -3,54 +3,68 @@ body {
     line-height: 1.4;
     margin: 0;
     padding: 0;
+    padding-top: 140px; /* Space for fixed header and nav - increased to prevent overlap */
     background-color: #ffffff; /* White background */
     color: #000000; /* Black text */
 }
 
-.container {
-    display: flex;
-    min-height: 100vh;
-}
-
-.sidebar {
-    width: 300px;
-    background-color: rgb(51, 153, 102); /* Green background */
-    padding: 20px;
-    border-right: 2px solid rgb(232, 231, 232); /* Gray border */
+/* Sticky Header with Company Name */
+.header {
     position: fixed;
-    height: 100vh;
-    overflow-y: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(51, 153, 102); /* Green background */
+    padding: 15px 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.sidebar h1 {
+.header h1 {
     color: #ffffff; /* White title */
-    border-bottom: 2px solid #ffffff; /* White underline */
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-    margin-top: 20px; /* Match content h2 positioning */
+    text-align: center;
+    margin: 0;
     font-size: 24px;
-    line-height: 1.4; /* Match body line-height */
-    text-align: center; /* Center align the title */
+    line-height: 1.4;
 }
 
-.sidebar h1 a {
+.header h1 a {
     color: #ffffff; /* White title */
     text-decoration: none;
 }
 
-.sidebar h1 a:hover {
+.header h1 a:hover {
     color: #ffffff; /* Keep white on hover */
     text-decoration: none;
+}
+
+/* Horizontal Navigation Bar */
+.nav-bar {
+    position: fixed;
+    top: 60px; /* Below header */
+    left: 0;
+    width: 100%;
+    background-color: rgb(51, 153, 102); /* Green background */
+    padding: 10px 0;
+    z-index: 999;
+    border-top: 2px solid #ffffff; /* White separator line */
 }
 
 .nav-menu {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .nav-menu li {
-    margin-bottom: 10px;
+    flex: 1;
+    max-width: 220px;
 }
 
 .nav-menu a {
@@ -59,10 +73,11 @@ body {
     text-decoration: none;
     color: #000000; /* Black text */
     background-color: #ffffff; /* White background */
-    border: 4px solid #ffffff; /* Thick white border */
+    border: 3px solid #ffffff; /* Thick white border */
     border-radius: 5px;
     transition: background-color 0.3s;
-    text-align: center; /* Center align button text */
+    text-align: center;
+    font-weight: 500;
 }
 
 .nav-menu a:hover {
@@ -70,17 +85,23 @@ body {
 }
 
 .nav-menu a.active {
-    background-color: rgb(95, 194, 129); /* Much lighter green background for distinction */
+    background-color: rgb(95, 194, 129); /* Lighter green background for distinction */
     color: #ffffff; /* White text for active */
     font-weight: bold; /* Bold text for active button */
-    border: 4px solid #ffffff; /* Thick white border */
+    border: 3px solid #ffffff; /* Thick white border */
+}
+
+/* Main Content Area */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .content {
-    margin-left: 300px;
-    padding: 20px 40px 40px 60px; /* Top Right Bottom Left - increased left padding */
-    flex: 1;
-    max-width: calc(100% - 300px);
+    padding: 40px 20px;
+    width: 100%;
+    max-width: none;
 }
 
 .content h2 {
@@ -88,10 +109,9 @@ body {
     border-bottom: 2px solid rgb(232, 231, 232); /* Gray underline */
     padding-bottom: 10px;
     margin-bottom: 30px;
-    margin-top: 20px; /* Match sidebar title top margin */
-    font-size: 24px; /* Match sidebar title size */
-    line-height: 1.4; /* Match body line-height */
-    /* Underline now starts where text starts - no negative margin */
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 1.4;
 }
 
 .content h3 {
@@ -121,7 +141,7 @@ body {
 
 .pdf-section {
     margin-top: 30px;
-    padding: 20px; /* Consistent padding on all sides */
+    padding: 20px;
     border: 1px solid rgb(232, 231, 232); /* Gray border */
     border-radius: 5px;
     background-color: #fafafa;
@@ -134,12 +154,12 @@ body {
 .pdf-list {
     list-style: none;
     padding-left: 0;
-    margin-left: 0; /* Override any inherited margin */
+    margin-left: 0;
 }
 
 .pdf-list li {
     margin-bottom: 15px;
-    padding: 10px 10px 10px 0; /* Remove left padding so box edges align with text */
+    padding: 10px 10px 10px 0;
     background-color: #ffffff;
     border: 1px solid rgb(232, 231, 232); /* Gray border */
     border-radius: 3px;
@@ -148,7 +168,7 @@ body {
 .pdf-list a {
     color: #0066cc; /* Standard blue hyperlink color */
     text-decoration: none;
-    font-weight: normal; /* Remove bold styling */
+    font-weight: normal;
 }
 
 .pdf-list a:hover {
@@ -156,39 +176,66 @@ body {
 }
 
 footer {
-    margin-left: 300px;
-    padding: 20px 40px 20px 60px; /* Match content left padding */
+    padding: 20px;
     border-top: 1px solid rgb(232, 231, 232); /* Gray border */
     background-color: #f8f9fa;
     color: #666;
     font-size: 14px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        position: relative;
-        height: auto;
+    body {
+        padding-top: 70px; /* Only space for header - nav becomes static */
+    }
+    
+    .header h1 {
+        font-size: 20px;
+    }
+    
+    .nav-bar {
+        position: static; /* Make nav flow with content instead of fixed */
+        padding: 15px 0;
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0 15px;
+    }
+    
+    .nav-menu li {
+        max-width: none;
     }
     
     .content {
-        margin-left: 0;
-        max-width: 100%;
-        padding: 20px;
+        padding: 20px 15px;
     }
     
     .content h2 {
-        margin-left: 0; /* Reset on mobile */
-        padding-left: 0; /* Reset on mobile */
-        font-size: 20px; /* Smaller on mobile */
-    }
-    
-    .container {
-        flex-direction: column;
+        font-size: 20px;
     }
     
     footer {
-        margin-left: 0;
-        padding: 20px;
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu a {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .header {
+        padding: 12px 0;
+    }
+    
+    .header h1 {
+        font-size: 18px;
     }
 }
