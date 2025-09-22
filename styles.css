@@ -112,19 +112,14 @@ body {
 
 .pdf-section {
     margin-top: 30px;
-    padding: 20px 20px 20px 0; /* Remove left padding to align with content text */
+    padding: 20px; /* Consistent padding on all sides */
     border: 1px solid rgb(232, 231, 232); /* Gray border */
     border-radius: 5px;
     background-color: #fafafa;
 }
 
-.pdf-section p {
-    padding-left: 1px; /* Align with PDF box border */
-}
-
 .pdf-section h3 {
     margin-top: 0; /* Remove extra space above */
-    padding-left: 1px; /* Align with PDF box border */
 }
 
 .pdf-list {
@@ -134,7 +129,7 @@ body {
 
 .pdf-list li {
     margin-bottom: 15px;
-    padding: 10px 10px 10px 0; /* Remove left padding to align with text above */
+    padding: 10px; /* Consistent padding to align with text above */
     background-color: #ffffff;
     border: 1px solid rgb(232, 231, 232); /* Gray border */
     border-radius: 3px;
