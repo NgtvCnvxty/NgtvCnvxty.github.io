@@ -47,7 +47,7 @@ body {
     background-color: #ffffff; /* White background */
     padding: 15px 0;
     z-index: 999;
-    border-bottom: 2px solid rgb(232, 231, 232); /* Gray separator line */
+    border-bottom: 2px solid rgb(51, 153, 102); /* Green separator line */
 }
 
 .nav-menu {
@@ -57,7 +57,7 @@ body {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    padding: 0 40px;
+    padding: 0 20px;
 }
 
 .nav-menu li {
@@ -70,7 +70,7 @@ body {
     text-decoration: none;
     color: #000000; /* Black text */
     background-color: #ffffff; /* White background */
-    border: 3px solid rgb(232, 231, 232); /* Gray border */
+    border: 3px solid rgb(51, 153, 102); /* Green border */
     border-radius: 5px;
     transition: background-color 0.3s;
     text-align: center;
@@ -199,7 +199,7 @@ footer {
         position: static; /* Make nav flow with content instead of fixed */
         padding: 15px 0;
         background-color: #ffffff; /* White background */
-        border-bottom: 2px solid rgb(232, 231, 232); /* Gray separator line */
+        border-bottom: 2px solid rgb(51, 153, 102); /* Green separator line */
     }
     
     .nav-menu {
