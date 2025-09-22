@@ -8,17 +8,29 @@ This is a static corporate website for SD Capital Systems Inc., a Canadian finan
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### September 22, 2025 - Navigation Transformation Complete
+- **Complete navigation redesign**: Transformed from left sidebar to modern sticky top navigation layout
+- **Perfect alignment system**: Content now aligns precisely with navigation button edges (left edge with Company Overview, right edge with Letters to Canadians)
+- **Rebranding**: Changed "Publications and Perspectives" to "Letters to Canadians" across all pages
+- **Content restructuring**: Removed gray boxes and descriptive text from Letters to Canadians, formatted PDF links as clean bullet points
+- **Layout stability**: Fixed layout shifts between pages by stabilizing font weights and preventing text wrapping in navigation
+- **Professional styling**: Green branding scheme with white navigation panel, green borders, and consistent spacing
+- **Mobile responsiveness**: Proper responsive design for all screen sizes
+- **Ready for Git**: All changes tested and ready for GitHub deployment
+
 ## System Architecture
 
 ### Frontend Architecture
 - **Static HTML/CSS Website**: Pure vanilla HTML5 with CSS3 styling, no JavaScript frameworks or build tools required
 - **Multi-page Structure**: Traditional server-side navigation with separate HTML files for each section
 - **Responsive Design**: Mobile-first approach with viewport meta tags and flexible layouts
-- **Component Consistency**: Shared navigation sidebar and footer across all pages with consistent styling
+- **Component Consistency**: Shared sticky top navigation and footer across all pages with consistent styling
 
 ### Navigation and Routing
 - **Client-side Redirect**: Index page automatically redirects users to company-overview.html as the default landing page
-- **Sidebar Navigation**: Fixed-position navigation menu with active state indicators
+- **Sticky Top Navigation**: Fixed-position horizontal navigation bar with active state indicators
 - **Static Routing**: Direct file-based routing with .html extensions
 
 ### Content Management
@@ -30,7 +42,7 @@ Preferred communication style: Simple, everyday language.
 - **Single CSS File**: Centralized styles.css file with global styling rules
 - **Color Scheme**: Professional green and gray color palette with white backgrounds
 - **Typography**: Arial font family with consistent line-height of 1.4
-- **Layout System**: Flexbox-based layout with fixed sidebar and flexible content area
+- **Layout System**: Flexbox-based layout with sticky top navigation and flexible content area
 
 ## External Dependencies
 
