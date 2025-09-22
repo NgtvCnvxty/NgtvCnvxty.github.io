@@ -86,8 +86,7 @@ body {
     margin-top: 20px; /* Match sidebar title top margin */
     font-size: 24px; /* Match sidebar title size */
     line-height: 1.4; /* Match body line-height */
-    margin-left: -40px; /* Move underline to match sidebar spacing */
-    padding-left: 40px; /* Add back spacing for text */
+    /* Underline now starts where text starts - no negative margin */
 }
 
 .content h3 {
@@ -130,7 +129,7 @@ body {
 
 .pdf-list li {
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 10px 10px 10px 0; /* Remove left padding to align with text above */
     background-color: #ffffff;
     border: 1px solid rgb(232, 231, 232); /* Gray border */
     border-radius: 3px;
