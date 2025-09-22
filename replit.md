@@ -1,36 +1,42 @@
-# Overview
+# SD Capital Systems Inc. Website
 
-SD Capital Systems Inc. is a Canadian financial technology company building a marketplace for Canadian dollar fixed income securities. The repository contains the source code for their corporate website, which serves as an informational platform showcasing their business model, marketplace offerings, and thought leadership in the fixed income space. The website focuses on increasing retail investor access to various Canadian fixed income securities including government bonds, corporate bonds, and preferred shares.
+## Overview
 
-# User Preferences
+This repository contains the source code for SD Capital Systems Inc.'s corporate website, a Canadian financial technology company focused on fixed income securities. The website serves as an informational platform showcasing the company's marketplace for Canadian bonds, convertible bonds, and preferred shares targeted at retail investors. The site is hosted on GitHub Pages and provides company information, business plans, marketplace details, and financial publications.
+
+## User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-# System Architecture
+## System Architecture
 
-## Frontend Architecture
-The website uses a traditional multi-page HTML architecture with a consistent navigation structure across all pages. The design follows a sidebar-based layout pattern with fixed navigation on the left and main content area on the right. The architecture prioritizes simplicity and accessibility, using standard HTML5 semantic elements and CSS for styling without any JavaScript frameworks.
+### Frontend Architecture
+The website follows a simple multi-page HTML architecture with a consistent navigation structure across all pages. The design uses a sidebar navigation pattern with a fixed layout that provides easy access to all sections. JavaScript is minimally used, with only a redirect script on the homepage to automatically navigate users to the company overview page.
 
-## Page Structure and Navigation
-The website implements a four-page structure with a unified navigation system:
-- Company Overview (default landing page)
-- Company Plan (placeholder for future content)
-- Fixed Income Marketplace (detailed product offerings)
-- Publications and Perspectives (thought leadership content with PDF resources)
+### Page Structure and Navigation
+The site consists of five main HTML pages organized around a central navigation system:
+- Homepage (index.html) with automatic redirect to company overview
+- Company Overview page providing business description
+- Company Plan page (currently placeholder content)
+- Fixed Income Marketplace page detailing available securities
+- Publications and Perspectives page with downloadable PDF resources
 
-## Styling and Design System
-The CSS architecture uses a clean, professional design with a green and gray color scheme that reflects the financial services branding. The layout is responsive and uses flexbox for the main container structure. The design emphasizes readability and professional presentation suitable for a financial services company.
+### Styling and Design System
+The CSS follows a clean, professional design with a consistent color scheme using green accents (#339966) for branding and gray borders for visual separation. The layout uses flexbox for the main container structure with a fixed sidebar navigation and responsive content area.
 
-## Content Management
-The website uses static HTML files with embedded content, making it easy to deploy and maintain. PDF documents are stored in a dedicated PDFs directory and linked directly from the publications page, providing easy access to analytical materials and research papers.
+### Content Management
+Static HTML content is used throughout with manual content updates. The publications section includes links to PDF documents stored in a dedicated PDFs directory, allowing for easy addition of new financial analysis documents.
 
-# External Dependencies
+## External Dependencies
 
-## Hosting Platform
-The website is deployed using GitHub Pages, hosted at https://ngtvcnvxty.github.io/, providing reliable static site hosting with automatic deployment from the repository.
+### Hosting Platform
+- **GitHub Pages**: Used for static site hosting and deployment
+- **Domain**: Currently hosted at https://ngtvcnvxty.github.io/
 
-## External Resources
-The website links to PDF documents stored in the repository for publications and analytical materials, including financial analysis papers on topics like USD/CAD forward rate calculations and natural cubic spline implementations in Python.
+### Asset Management
+- **PDF Storage**: Local file storage for financial publications and analysis documents
+- **No External CDNs**: All styles and scripts are self-hosted for maximum control and reliability
 
-## Browser Dependencies
-The website relies on standard web technologies (HTML5, CSS3, and minimal JavaScript for redirects) ensuring broad browser compatibility without requiring external libraries or frameworks.
+### Browser Compatibility
+- **Standard HTML5/CSS3**: Compatible with all modern browsers
+- **No JavaScript Frameworks**: Minimal JavaScript dependency reduces compatibility issues

@@ -1,6 +1,6 @@
 # SD Capital Systems Inc.
 
-This repository contains the source code for the webpage of Canadian financial technology company, SD Capital Systems
+This repository contains the source code for the webpage of Canadian financial technology company, SD Capital Systems 
 Inc.
 
 ## Viewing the Webpage
