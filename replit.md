@@ -1,47 +1,55 @@
 # SD Capital Systems Inc. Website
 
 ## Overview
-This is a static HTML website for SD Capital Systems Inc., a Canadian financial technology company building a marketplace for Canadian dollar fixed income securities. The website provides information about their services and the types of securities they offer.
 
-## Project Architecture
-- **Type**: Static HTML website
-- **Frontend**: HTML, CSS
-- **Server**: Python HTTP server
-- **Port**: 5000 (configured for Replit environment)
-
-## Recent Changes (September 22, 2025)
-- Imported project from GitHub
-- Set up Python 3.11 environment for HTTP server
-- Transformed single-page website into professional multi-page structure
-- Implemented left-side navigation with 4 sections: Company Overview, Company Plan, Fixed Income Marketplace, Publications and Perspectives
-- Applied company branding: green RGB(51,153,102) titles, gray RGB(232,231,232) borders, black text
-- Added PDF publishing functionality to Publications section
-- Achieved pixel-perfect alignment of titles and underlines across all pages
-- Organized file structure: src/ folder for HTML/CSS, PDFs/ folder for documents
-- Configured workflow to serve from src/ directory on port 5000 with 0.0.0.0 binding
-- Configured deployment for autoscale target
-
-## Project Structure
-```
-├── src/                          # Source files
-│   ├── index.html               # Landing page (redirects to Company Overview)
-│   ├── company-overview.html    # Company Overview page
-│   ├── company-plan.html        # Company Plan page  
-│   ├── fixed-income-marketplace.html # Fixed Income Marketplace page
-│   ├── founder-perspectives.html # Publications and Perspectives page
-│   └── styles.css               # Main stylesheet
-├── PDFs/                        # PDF documents
-│   ├── USDCAD_Forward_Rate.pdf  # Forward Exchange Rate Calculation
-│   └── Natural_Cubic_Spline_Python.pdf # Natural Cubic Spline - Python
-├── README.md                    # Original project documentation
-└── replit.md                    # Project summary and preferences
-```
-
-## Deployment Configuration
-- Target: Autoscale (suitable for static websites)
-- Command: `cd src && python -m http.server 5000 --bind 0.0.0.0`
-- No build step required (static files)
+This repository contains the corporate website for SD Capital Systems Inc., a Canadian financial technology company that specializes in building a marketplace for Canadian dollar fixed income securities. The website is designed as a multi-page informational site that provides company information, business plans, marketplace details, and published financial analysis documents. The site focuses on increasing retail investor access to fixed income securities in the Canadian market.
 
 ## User Preferences
-- Follow existing simple structure
-- Maintain original styling and content
+
+Preferred communication style: Simple, everyday language.
+
+## System Architecture
+
+### Frontend Architecture
+The project uses a traditional multi-page HTML architecture with static files. Each page follows a consistent structure with a fixed sidebar navigation and main content area. The design implements a clean, professional layout suitable for a financial services company.
+
+**Key Design Decisions:**
+- Static HTML pages for simplicity and fast loading
+- Consistent navigation structure across all pages
+- Responsive design using CSS flexbox
+- Fixed sidebar for easy navigation between sections
+
+### Page Structure
+The website consists of five main HTML pages:
+- `index.html` - Landing page with automatic redirect to company overview
+- `company-overview.html` - Main company information and mission
+- `company-plan.html` - Business strategy and planning details
+- `fixed-income-marketplace.html` - Detailed marketplace offerings and securities
+- `founder-perspectives.html` - Publications and analytical documents
+
+### Styling Architecture
+The project uses a single CSS file (`styles.css`) that provides:
+- Corporate color scheme with green accents (#339966) and neutral grays
+- Professional typography using Arial font family
+- Responsive layout with fixed sidebar (300px width)
+- Clean, minimalist design appropriate for financial services
+
+### Content Strategy
+The site focuses on showcasing the company's expertise in Canadian fixed income markets, including government bonds, municipal bonds, corporate bonds, and various specialized securities. The publications section demonstrates analytical capabilities through PDF documents covering financial modeling and analysis.
+
+## External Dependencies
+
+### Static File Hosting
+- **GitHub Pages**: Used for hosting the live website at https://ngtvcnvxty.github.io/
+- **PDF Documents**: External PDF files hosted in a `PDFs` directory for analytical publications
+
+### Browser Compatibility
+- Standard HTML5 and CSS3 features
+- JavaScript for simple page redirection functionality
+- No external JavaScript libraries or frameworks required
+
+### Domain and SSL
+- Hosted on GitHub's infrastructure with built-in SSL
+- Uses GitHub Pages' default domain structure
+
+The architecture prioritizes simplicity, fast loading times, and professional presentation suitable for a financial technology company targeting retail investors and industry professionals.
