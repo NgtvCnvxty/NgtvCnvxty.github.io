@@ -57,6 +57,8 @@ body {
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
@@ -205,6 +207,8 @@ footer {
     .nav-menu {
         flex-direction: column;
         gap: 8px;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 0 15px;
     }
     
@@ -213,7 +217,7 @@ footer {
     }
     
     .content {
-        padding: 20px;
+        padding: 20px 0;
     }
     
     .content h2 {
