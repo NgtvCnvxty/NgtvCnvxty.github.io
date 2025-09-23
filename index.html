@@ -4,31 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD Capital Systems</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: rgb(51, 153, 102);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+        }
+        
+        .landing-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .company-name {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .enter-text {
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        @media (max-width: 768px) {
+            .company-name {
+                font-size: 36px;
+            }
+            
+            .enter-text {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .company-name {
+                font-size: 28px;
+            }
+            
+            .enter-text {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
-<body>
-    <header class="header">
-        <h1><a href="index.html">SD Capital Systems</a></h1>
-    </header>
-    
-    <nav class="nav-bar">
-        <ul class="nav-menu">
-            <li><a href="company-overview.html">Company Overview</a></li>
-            <li><a href="company-plan.html">Company Plan</a></li>
-            <li><a href="fixed-income-marketplace.html">Fixed Income Marketplace</a></li>
-            <li><a href="letters-to-canadians.html">Letters to Canadians</a></li>
-        </ul>
-    </nav>
-    
-    <script>
-        // Redirect to Company Overview as the default landing page
-        window.location.href = 'company-overview.html';
-    </script>
-    
-    <div class="container">
-        <footer>
-            <p>&copy; 2025 SD Capital Systems Inc. All rights reserved.</p>
-        </footer>
+<body onclick="window.location.href='company-overview.html'">
+    <div class="landing-content">
+        <div class="company-name">SD Capital System</div>
+        <div class="enter-text">(enter)</div>
     </div>
 </body>
 </html>
