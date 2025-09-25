@@ -4,61 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SD Capital Systems</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: rgb(51, 153, 102);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            cursor: pointer;
-        }
-        
-        .landing-content {
-            text-align: center;
-            color: white;
-        }
-        
-        .company-name {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .enter-text {
-            font-size: 24px;
-            font-weight: normal;
-        }
-        
-        @media (max-width: 768px) {
-            .company-name {
-                font-size: 36px;
-            }
-            
-            .enter-text {
-                font-size: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .company-name {
-                font-size: 28px;
-            }
-            
-            .enter-text {
-                font-size: 18px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body onclick="window.location.href='company-overview.html'">
-    <div class="landing-content">
-        <div class="company-name">SD Capital Systems</div>
-        <div class="enter-text">(enter)</div>
-    </div>
+<body>
+    <nav class="navbar">
+        <div class="logo">SD Capital Systems</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="company-overview.html">Overview</a></li>
+        </ul>
+    </nav>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">SD Capital Systems</h1>
+            <p class="hero-tagline" id="typing-tagline"></p>
+            <a href="company-overview.html" class="cta-button">Explore More</a>
+        </div>
+    </header>
+    
+    <section class="intro">
+        <h2>Welcome to the Future of Fixed Income</h2>
+        <p>Unlock access to bonds, convertible bonds, and preferred shares tailored for Canadian retail investors.</p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 SD Capital Systems. All rights reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>
