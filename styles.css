@@ -3,7 +3,7 @@ body {
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    padding-top: 140px; /* Space for fixed header and nav - increased to prevent overlap */
+    padding-top: 160px; /* Space for fixed header and nav - increased to prevent overlap */
     background: linear-gradient(135deg, #f8fffe 0%, #ffffff 50%, #f0f8f5 100%);
     color: #1a1a1a;
     overflow-y: scroll; /* Always show scrollbar to prevent layout shifts */
@@ -29,10 +29,10 @@ body::before {
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(135deg, rgb(51, 153, 102), rgb(76, 175, 110));
+    background: linear-gradient(135deg, rgb(26, 77, 46), rgb(46, 92, 62));
     padding: 15px 0;
     z-index: 1000;
-    box-shadow: 0 4px 20px rgba(51, 153, 102, 0.3);
+    box-shadow: 0 4px 20px rgba(26, 77, 46, 0.3);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
@@ -135,7 +135,7 @@ body::before {
 }
 
 .nav-menu a.active {
-    background: linear-gradient(135deg, rgb(51, 153, 102), rgb(76, 175, 110));
+    background: linear-gradient(135deg, rgb(26, 77, 46), rgb(46, 92, 62));
     color: #ffffff;
     font-weight: 600;
     border: 2px solid rgba(255,255,255,0.2);
@@ -195,7 +195,7 @@ body::before {
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.3px;
-    opacity: 0;
+    opacity: 1;
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
@@ -204,7 +204,7 @@ body::before {
     line-height: 1.7;
     font-size: 16px;
     color: #333;
-    opacity: 0;
+    opacity: 1;
     animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
