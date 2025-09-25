@@ -30,6 +30,8 @@ body::before {
     left: 0;
     width: 100%;
     background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
     padding: 15px 0;
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(26, 77, 46, 0.3);
@@ -136,6 +138,8 @@ body::before {
 
 .nav-menu a.active {
     background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
     color: #ffffff;
     font-weight: 600;
     border: 2px solid rgba(255,255,255,0.2);
@@ -351,11 +355,25 @@ footer {
 }
 
 /* Reduced Motion Support */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+    
+    .header {
+        animation: none;
+    }
+    
+    .nav-menu a.active {
+        animation: none;
     }
     
     body::before {
