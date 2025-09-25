@@ -3,7 +3,7 @@ body {
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    padding-top: 160px; /* Space for fixed header and nav - increased to prevent overlap */
+    padding-top: 120px; /* Space for fixed header and nav */
     background: linear-gradient(135deg, #f8fffe 0%, #ffffff 50%, #f0f8f5 100%);
     color: #1a1a1a;
     overflow-y: scroll; /* Always show scrollbar to prevent layout shifts */
