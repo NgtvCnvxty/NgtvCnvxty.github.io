@@ -174,9 +174,11 @@ body::before {
 }
 
 .content h2 {
-    color: #1a4d2e;
-    border-bottom: 3px solid transparent;
-    border-image: linear-gradient(to right, #1a4d2e, rgba(26, 77, 46, 0.3)) 1;
+    color: #000000 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
     padding-bottom: 15px;
     margin-bottom: 35px;
     margin-top: 25px;
