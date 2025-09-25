@@ -174,11 +174,9 @@ body::before {
 }
 
 .content h2 {
-    color: rgb(51, 153, 102);
+    color: #1a4d2e;
     border-bottom: 3px solid transparent;
-    background: linear-gradient(to right, rgba(51, 153, 102, 0.1), transparent) padding-box,
-                linear-gradient(to right, rgb(51, 153, 102), rgba(51, 153, 102, 0.3)) border-box;
-    border-image: linear-gradient(to right, rgb(51, 153, 102), rgba(51, 153, 102, 0.3)) 1;
+    border-image: linear-gradient(to right, #1a4d2e, rgba(26, 77, 46, 0.3)) 1;
     padding-bottom: 15px;
     margin-bottom: 35px;
     margin-top: 25px;
