@@ -211,6 +211,8 @@ body::before {
 .content ul {
     padding-left: 20px;
     margin-bottom: 20px;
+    opacity: 1;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
 
 .content ul.pdf-list {
