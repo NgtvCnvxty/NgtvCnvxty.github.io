@@ -95,7 +95,7 @@ body::before {
     text-decoration: none;
     color: #2c2c2c;
     background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border: 2px solid transparent;
+    border: 2px solid #1a4d2e;
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
