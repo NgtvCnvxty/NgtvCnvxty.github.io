@@ -152,19 +152,8 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    animation: fadeInUp 0.8s ease-out;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 .content {
     padding: 50px 0;
@@ -195,8 +184,6 @@ body::before {
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.3px;
-    opacity: 1;
-    animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
 .content p {
@@ -204,15 +191,11 @@ body::before {
     line-height: 1.7;
     font-size: 16px;
     color: #333;
-    opacity: 1;
-    animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
 .content ul {
     padding-left: 20px;
     margin-bottom: 20px;
-    opacity: 1;
-    animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
 
 .content ul.pdf-list {
