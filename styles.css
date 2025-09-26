@@ -369,7 +369,7 @@ footer {
 .landing-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     height: 100vh;
     text-align: left;
@@ -381,7 +381,7 @@ footer {
     animation: fadeInUp 1.5s ease forwards;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 140px 20px 0 20px;
 }
 
 .hero-text {
@@ -415,7 +415,7 @@ footer {
     opacity: 0.9;
     max-width: 600px;
     line-height: 1.6;
-    margin: 0 0 80px 0;
+    margin: 0 0 40px 0;
 }
 
 /* Signup Form */
