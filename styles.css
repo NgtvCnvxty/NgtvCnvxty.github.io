@@ -384,6 +384,10 @@ footer {
     padding: 0 20px;
 }
 
+.hero-text {
+    max-width: 520px; /* Constrains text to not extend past Company Overview button */
+}
+
 @keyframes fadeInUp {
     to {
         transform: translateY(0);
@@ -411,7 +415,7 @@ footer {
     opacity: 0.9;
     max-width: 600px;
     line-height: 1.6;
-    margin: 0 0 40px 0;
+    margin: 0 0 60px 0;
 }
 
 /* Signup Form */
@@ -426,9 +430,9 @@ footer {
     padding: 12px 20px;
     border: 2px solid rgba(255,255,255,0.3);
     border-radius: 50px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.9);
     backdrop-filter: blur(10px);
-    color: white;
+    color: black;
     font-size: 16px;
     font-family: 'Arial', sans-serif;
     width: 280px;
@@ -437,14 +441,14 @@ footer {
 }
 
 .signup-input::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.6);
     font-weight: 300;
 }
 
 .signup-input:focus {
-    background: rgba(255,255,255,0.2);
-    border-color: rgba(255,255,255,0.5);
-    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    background: rgba(255,255,255,1);
+    border-color: rgba(255,255,255,0.8);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
 .signup-button {
