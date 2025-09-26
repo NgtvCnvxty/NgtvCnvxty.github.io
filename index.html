@@ -89,9 +89,9 @@
             if (!value && value !== 0) return '';
             
             switch(columnIndex) {
-                case 0: // First column: "0.000%" format
+                case 0: // First column: Coupon Rate - multiply by 100 for "0.000%" format
                     const percent1 = parseFloat(value);
-                    return Number.isFinite(percent1) ? `${percent1.toFixed(3)}%` : value;
+                    return Number.isFinite(percent1) ? `${(percent1 * 100).toFixed(3)}%` : value;
                 
                 case 1: // Second column: MMM-YYYY date format
                     if (value instanceof Date) {
@@ -107,9 +107,9 @@
                     const currency = parseFloat(value);
                     return Number.isFinite(currency) ? `$${currency.toFixed(2)}` : value;
                 
-                case 3: // Fourth column: "0.000%" format
+                case 3: // Fourth column: YTM - multiply by 100 for "0.000%" format
                     const percent2 = parseFloat(value);
-                    return Number.isFinite(percent2) ? `${percent2.toFixed(3)}%` : value;
+                    return Number.isFinite(percent2) ? `${(percent2 * 100).toFixed(3)}%` : value;
                 
                 case 4: // Fifth column: "0.00" format
                     const decimal = parseFloat(value);
