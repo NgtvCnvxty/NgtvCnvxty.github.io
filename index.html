@@ -61,35 +61,22 @@
                 const response = await fetch('MarketData/Bonds.xlsx');
                 const arrayBuffer = await response.arrayBuffer();
                 
-                // Parse the Excel file
-                const workbook = XLSX.read(arrayBuffer);
+                // Parse the Excel file with proper options
+                const workbook = XLSX.read(arrayBuffer, {type: 'array'});
                 const worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 
-                // Extract data from B2:F17 as requested
-                const range = XLSX.utils.decode_range('B2:F17');
+                // Extract headers and data from B1:F17 using sheet_to_json
+                const matrix = XLSX.utils.sheet_to_json(worksheet, {
+                    header: 1,
+                    range: 'B1:F17'
+                });
                 
-                // Get headers from row 1 (B1:F1)
-                const headers = [];
-                for (let col = range.s.c; col <= range.e.c; col++) {
-                    const cellRef = XLSX.utils.encode_cell({r: 1, c: col});
-                    const cell = worksheet[cellRef];
-                    headers.push(cell ? cell.v : '');
+                if (matrix.length > 0) {
+                    const [headers, ...data] = matrix;
+                    populateTable(headers, data);
+                } else {
+                    loadSampleData();
                 }
-                
-                // Get data rows
-                const data = [];
-                for (let row = range.s.r; row <= range.e.r; row++) {
-                    const rowData = [];
-                    for (let col = range.s.c; col <= range.e.c; col++) {
-                        const cellRef = XLSX.utils.encode_cell({r: row, c: col});
-                        const cell = worksheet[cellRef];
-                        rowData.push(cell ? cell.v : '');
-                    }
-                    data.push(rowData);
-                }
-                
-                // Populate table
-                populateTable(headers, data);
                 
             } catch (error) {
                 console.error('Error loading bond data:', error);
@@ -101,18 +88,21 @@
         function populateTable(headers, data) {
             // Populate headers
             const headerRow = document.getElementById('table-headers');
-            headerRow.innerHTML = headers.map(header => `<th>${header}</th>`).join('');
+            headerRow.innerHTML = headers.map(header => `<th>${header || ''}</th>`).join('');
             
             // Populate data
             const tbody = document.getElementById('bond-data');
             tbody.innerHTML = data.map(row => {
                 return `<tr>${row.map((cell, index) => {
-                    // Apply special styling to 5-Day (bps) column (assuming it's the 5th column)
-                    if (index === 4 && typeof cell === 'number') {
-                        const className = cell >= 0 ? 'positive-change' : 'negative-change';
-                        return `<td class="${className}">${cell}</td>`;
+                    // Apply special styling to 5-Day (bps) column (5th column, index 4)
+                    if (index === 4) {
+                        const numValue = parseFloat(cell);
+                        if (Number.isFinite(numValue)) {
+                            const className = numValue >= 0 ? 'positive-change' : 'negative-change';
+                            return `<td class="${className}">${cell}</td>`;
+                        }
                     }
-                    return `<td>${cell}</td>`;
+                    return `<td>${cell || ''}</td>`;
                 }).join('')}</tr>`;
             }).join('');
         }
