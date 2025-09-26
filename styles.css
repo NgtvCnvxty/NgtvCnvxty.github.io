@@ -326,7 +326,8 @@ footer {
     background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
     position: relative;
     padding-top: 0; /* Override body padding for full-height landing */
 }
