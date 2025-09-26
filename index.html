@@ -85,6 +85,41 @@
             }
         }
         
+        function formatCell(value, columnIndex) {
+            if (!value && value !== 0) return '';
+            
+            switch(columnIndex) {
+                case 0: // First column: "0.000%" format
+                    const percent1 = parseFloat(value);
+                    return Number.isFinite(percent1) ? `${percent1.toFixed(3)}%` : value;
+                
+                case 1: // Second column: MMM-YYYY date format
+                    if (value instanceof Date) {
+                        return value.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                    } else if (typeof value === 'number') {
+                        // Excel date serial number
+                        const date = new Date((value - 25569) * 86400 * 1000);
+                        return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                    }
+                    return value;
+                
+                case 2: // Third column: $000.00 format
+                    const currency = parseFloat(value);
+                    return Number.isFinite(currency) ? `$${currency.toFixed(2)}` : value;
+                
+                case 3: // Fourth column: "0.000%" format
+                    const percent2 = parseFloat(value);
+                    return Number.isFinite(percent2) ? `${percent2.toFixed(3)}%` : value;
+                
+                case 4: // Fifth column: "0.00" format
+                    const decimal = parseFloat(value);
+                    return Number.isFinite(decimal) ? decimal.toFixed(2) : value;
+                
+                default:
+                    return value;
+            }
+        }
+        
         function populateTable(headers, data) {
             // Populate headers
             const headerRow = document.getElementById('table-headers');
@@ -94,15 +129,17 @@
             const tbody = document.getElementById('bond-data');
             tbody.innerHTML = data.map(row => {
                 return `<tr>${row.map((cell, index) => {
+                    const formattedValue = formatCell(cell, index);
+                    
                     // Apply special styling to 5-Day (bps) column (5th column, index 4)
                     if (index === 4) {
                         const numValue = parseFloat(cell);
                         if (Number.isFinite(numValue)) {
                             const className = numValue >= 0 ? 'positive-change' : 'negative-change';
-                            return `<td class="${className}">${cell}</td>`;
+                            return `<td class="${className}">${formattedValue}</td>`;
                         }
                     }
-                    return `<td>${cell || ''}</td>`;
+                    return `<td>${formattedValue}</td>`;
                 }).join('')}</tr>`;
             }).join('');
         }
