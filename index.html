@@ -12,12 +12,7 @@
             background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
             background-size: 400% 400%;
             animation: gradientShift 8s ease infinite;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             font-family: 'Arial', sans-serif;
-            cursor: pointer;
             overflow: hidden;
             position: relative;
         }
@@ -37,6 +32,7 @@
             
             body {
                 background: linear-gradient(135deg, #239a3b, #39b54a, #4caf50, #66bb6a);
+                animation: none;
             }
         }
         
@@ -52,7 +48,72 @@
             pointer-events: none;
         }
         
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            z-index: 1000;
+            background: rgba(26, 77, 46, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Landing Content */
         .landing-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             text-align: center;
             color: white;
             z-index: 2;
@@ -81,62 +142,48 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-fill-color: transparent;
-            transition: all 0.3s ease;
         }
         
-        .landing-content:hover .company-name {
-            transform: scale(1.02);
-            text-shadow: 3px 3px 12px rgba(0,0,0,0.4);
-        }
-        
-        .enter-button {
-            font-size: 16px;
-            font-weight: 400;
+        .tagline {
+            font-size: 18px;
+            font-weight: 300;
             opacity: 0.9;
-            margin-top: 30px;
-            padding: 12px 30px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            background: rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-            display: inline-block;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
+            max-width: 600px;
+            line-height: 1.6;
+            margin: 0 auto;
         }
         
-        .enter-button:focus-visible {
-            outline: 3px solid rgba(255,255,255,0.8);
-            outline-offset: 4px;
-        }
-        
-        .enter-button:hover,
-        .enter-button:focus {
-            background: rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .enter-button:hover,
-            .enter-button:focus {
-                transform: none;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            }
-        }
-        
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            .top-nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+                background: rgba(26, 77, 46, 0.2);
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
             .company-name {
                 font-size: 40px;
             }
             
-            .enter-button {
-                font-size: 14px;
-                padding: 10px 25px;
+            .tagline {
+                font-size: 16px;
+                padding: 0 20px;
             }
         }
         
@@ -146,18 +193,33 @@
                 letter-spacing: -0.5px;
             }
             
-            .enter-button {
+            .tagline {
+                font-size: 14px;
+            }
+            
+            .nav-links a {
+                padding: 6px 10px;
                 font-size: 12px;
-                padding: 8px 20px;
-                letter-spacing: 1px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="index.html" class="logo">SD Capital Systems</a>
+        <ul class="nav-links">
+            <li><a href="company-overview.html">Company Overview</a></li>
+            <li><a href="company-plan.html">Company Plan</a></li>
+            <li><a href="fixed-income-marketplace.html">Fixed Income Marketplace</a></li>
+            <li><a href="letters-to-canadians.html">Letters to Canadians</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Landing Content -->
     <div class="landing-content">
         <div class="company-name">SD Capital Systems</div>
-        <a href="company-overview.html" class="enter-button" aria-label="Enter SD Capital Systems website">enter</a>
+        <p class="tagline">Building a marketplace for Canadian fixed income securities with a focus on increasing access to bonds, convertible bonds and preferred shares for Canadian retail investors.</p>
     </div>
 </body>
 </html>
