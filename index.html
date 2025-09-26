@@ -36,7 +36,11 @@
         <!-- Bond Data Panel -->
         <div class="bond-panel">
             <h2>Canada Yield Curve</h2>
-            <table class="bond-table">
+            <div id="loading-state" class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Loading market data...</p>
+            </div>
+            <table class="bond-table" id="bond-table" style="display: none;">
                 <thead>
                     <tr id="table-headers">
                         <!-- Headers will be populated from Excel -->
@@ -132,6 +136,10 @@
         }
         
         function populateTable(headers, data) {
+            // Hide loading state and show table
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('bond-table').style.display = 'table';
+            
             // Populate headers
             const headerRow = document.getElementById('table-headers');
             headerRow.innerHTML = Object.values(headers).map(header => `<th>${header || ''}</th>`).join('');

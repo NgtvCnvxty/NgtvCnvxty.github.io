@@ -343,6 +343,33 @@ footer {
     border-bottom: 2px solid rgba(255,255,255,0.3);
 }
 
+.loading-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: white;
+}
+
+.loading-spinner {
+    border: 3px solid rgba(255,255,255,0.2);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+.loading-state p {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 14px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .bond-table {
     width: 100%;
     border-collapse: collapse;
