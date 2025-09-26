@@ -292,7 +292,23 @@ footer {
     
     .tagline {
         font-size: 16px;
-        padding: 0 20px;
+        padding: 0;
+    }
+    
+    .signup-form {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .signup-input {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .signup-button {
+        width: 100%;
+        max-width: 300px;
     }
     
     footer {
@@ -317,6 +333,12 @@ footer {
     
     .tagline {
         font-size: 14px;
+    }
+    
+    .signup-input,
+    .signup-button {
+        font-size: 14px;
+        padding: 10px 15px;
     }
 }
 
@@ -348,15 +370,18 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
-    text-align: center;
+    text-align: left;
     color: white;
     z-index: 2;
     position: relative;
     transform: translateY(20px);
     opacity: 0;
     animation: fadeInUp 1.5s ease forwards;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 @keyframes fadeInUp {
@@ -386,7 +411,73 @@ footer {
     opacity: 0.9;
     max-width: 600px;
     line-height: 1.6;
-    margin: 0 auto;
+    margin: 0 0 40px 0;
+}
+
+/* Signup Form */
+.signup-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.signup-input {
+    padding: 12px 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    width: 280px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.signup-input::placeholder {
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+}
+
+.signup-input:focus {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.signup-button {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+    padding: 12px 30px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    display: inline-block;
+    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    min-width: 160px;
+    text-align: center;
+}
+
+.signup-button:focus-visible {
+    outline: 3px solid rgba(255,255,255,0.8);
+    outline-offset: 4px;
+}
+
+.signup-button:hover,
+.signup-button:focus {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 /* Keyframes */
