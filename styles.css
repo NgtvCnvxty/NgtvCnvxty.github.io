@@ -3,7 +3,7 @@ body {
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    padding-top: 120px; /* Space for fixed header and nav */
+    padding-top: 80px; /* Space for new top navigation */
     background: linear-gradient(135deg, #f8fffe 0%, #ffffff 50%, #f0f8f5 100%);
     color: #1a1a1a;
     overflow-y: scroll; /* Always show scrollbar to prevent layout shifts */
@@ -23,132 +23,67 @@ body::before {
     z-index: -1;
 }
 
-/* Sticky Header with Company Name */
-.header {
+/* Top Navigation */
+.top-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    z-index: 1000;
     background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
-    padding: 15px 0;
-    z-index: 1000;
     box-shadow: 0 4px 20px rgba(26, 77, 46, 0.3);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.header h1 {
-    color: #ffffff;
-    text-align: center;
-    margin: 0;
-    font-size: 26px;
-    line-height: 1.4;
+.logo {
+    color: white;
+    font-size: 28px;
     font-weight: 700;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    text-decoration: none;
     letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.header h1 a {
-    color: #ffffff; /* White title */
-    text-decoration: none;
+.logo:hover {
+    transform: scale(1.05);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
 }
 
-.header h1 a:hover {
-    color: #ffffff; /* Keep white on hover */
-    text-decoration: none;
-}
-
-/* Horizontal Navigation Bar */
-.nav-bar {
-    position: fixed;
-    top: 60px; /* Below header */
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    padding: 15px 0;
-    z-index: 999;
-    border-bottom: 2px solid rgba(51, 153, 102, 0.2);
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-}
-
-.nav-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.nav-links {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-menu li {
-    flex: 1 1 0;
-    min-width: 0;
-}
-
-.nav-menu a {
-    display: block;
-    padding: 16px 22px;
+.nav-links a {
+    color: white;
     text-decoration: none;
-    color: #2c2c2c;
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border: 2px solid #1a4d2e;
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-align: center;
-    font-weight: 600;
-    min-height: 20px;
-    line-height: 1.2;
-    box-sizing: border-box;
-    white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-menu a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(51, 153, 102, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.nav-menu a:hover::before {
-    left: 100%;
-}
-
-.nav-menu a:hover,
-.nav-menu a:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(51, 153, 102, 0.15);
-    background: linear-gradient(135deg, #f8f9fa, #ffffff);
-    border-color: rgba(51, 153, 102, 0.3);
-    outline: 2px solid rgba(51, 153, 102, 0.4);
-    outline-offset: 2px;
-}
-
-.nav-menu a.active {
-    background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    color: #ffffff;
-    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.3s ease;
     border: 2px solid rgba(255,255,255,0.2);
-    box-shadow: 0 6px 20px rgba(51, 153, 102, 0.25);
-    transform: translateY(-1px);
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
 }
 
-.nav-menu a.active::before {
-    display: none;
+.nav-links a:hover,
+.nav-links a.active {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 /* Main Content Area */
@@ -158,10 +93,14 @@ body::before {
     padding: 0 20px;
 }
 
-
 .content {
-    padding: 50px 0;
-    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin: 20px 0;
     max-width: none;
     position: relative;
 }
@@ -228,47 +167,56 @@ body::before {
 }
 
 .pdf-section h3 {
-    margin-top: 0; /* Remove extra space above */
+    color: rgb(51, 153, 102);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(51, 153, 102, 0.1);
+    padding-bottom: 10px;
 }
 
 .pdf-list {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0;
 }
 
 .pdf-list li {
-    margin-bottom: 15px;
+    background: rgba(255,255,255,0.6);
+    margin-bottom: 12px;
     padding: 15px 20px;
-    background: linear-gradient(135deg, #ffffff, #fafafa);
-    border: 1px solid rgba(51, 153, 102, 0.08);
-    border-radius: 10px;
+    border-radius: 12px;
+    border-left: 4px solid rgb(51, 153, 102);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
 }
 
 .pdf-list li:hover {
+    background: rgba(255,255,255,0.9);
     transform: translateX(5px);
-    box-shadow: 0 4px 16px rgba(51, 153, 102, 0.12);
-    border-color: rgba(51, 153, 102, 0.15);
+    box-shadow: 0 4px 15px rgba(51, 153, 102, 0.1);
 }
 
 .pdf-list a {
     color: rgb(51, 153, 102);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
+    font-size: 15px;
     position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
 }
 
 .pdf-list a::after {
     content: '';
     position: absolute;
-    width: 0;
-    height: 2px;
     bottom: -2px;
     left: 0;
-    background: linear-gradient(90deg, rgb(51, 153, 102), rgb(76, 175, 110));
+    width: 0;
+    height: 2px;
+    background: rgb(76, 175, 110);
     transition: width 0.3s ease;
 }
 
@@ -296,38 +244,34 @@ footer {
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     body {
-        padding-top: 70px; /* Only space for header - nav becomes static */
+        padding-top: 120px; /* More space for mobile nav */
     }
     
-    .header h1 {
-        font-size: 20px;
-    }
-    
-    .nav-bar {
-        position: static; /* Make nav flow with content instead of fixed */
-        padding: 15px 0;
-        background-color: #ffffff; /* White background */
-        border-bottom: 2px solid rgb(51, 153, 102); /* Green separator line */
-    }
-    
-    .nav-menu {
+    .top-nav {
+        padding: 15px 20px;
         flex-direction: column;
-        gap: 8px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 15px;
+        gap: 15px;
+        background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
     }
     
-    .nav-menu a {
-        white-space: normal;
+    .logo {
+        font-size: 24px;
     }
     
-    .nav-menu li {
-        max-width: none;
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-links a {
+        padding: 8px 12px;
+        font-size: 14px;
     }
     
     .content {
-        padding: 20px 0;
+        padding: 20px;
+        margin: 10px;
     }
     
     .content h2 {
@@ -340,21 +284,17 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .nav-menu a {
-        padding: 10px 12px;
-        font-size: 14px;
+    .nav-links a {
+        padding: 6px 10px;
+        font-size: 12px;
     }
     
-    .header {
-        padding: 12px 0;
-    }
-    
-    .header h1 {
-        font-size: 18px;
+    .logo {
+        font-size: 20px;
     }
 }
 
-/* Reduced Motion Support */
+/* Keyframes */
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -368,49 +308,11 @@ footer {
         transition-duration: 0.01ms !important;
     }
     
-    .header {
-        animation: none;
-    }
-    
-    .nav-menu a.active {
+    .top-nav {
         animation: none;
     }
     
     body::before {
         background: none;
-    }
-    
-    .nav-menu a:hover,
-    .nav-menu a:focus-visible {
-        transform: none;
-    }
-    
-    .nav-menu a.active {
-        transform: none;
-    }
-    
-    .pdf-section:hover {
-        transform: none;
-    }
-    
-    .pdf-list li:hover {
-        transform: none;
-    }
-    
-    .header {
-        backdrop-filter: none;
-    }
-    
-    .nav-bar {
-        backdrop-filter: none;
-        background: rgba(255, 255, 255, 1);
-    }
-    
-    .pdf-section {
-        backdrop-filter: none;
-    }
-    
-    footer {
-        backdrop-filter: none;
     }
 }
