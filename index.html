@@ -28,9 +28,8 @@
                 <p class="tagline">Single name fixed-income securities from over 30 issuers across 5 fixed-income products including Government of Canada Bonds, Inflation-Linked Bonds, RioCan REIT Bonds, Cineplex Convertible Bonds and Power Financial Preferred Shares.</p>
             </div>
             <div class="signup-form">
-                <input type="text" class="signup-input" id="contact-input" placeholder="Phone/Email" />
-                <button class="signup-button" id="signup-btn">Receive Updates</button>
-                <div class="signup-message" id="signup-message" style="display: none;"></div>
+                <input type="email" class="signup-input" placeholder="Phone/Email" />
+                <button class="signup-button">Receive Updates</button>
             </div>
         </div>
         
@@ -178,76 +177,9 @@
             populateTable(headers, data);
         }
         
-        // Marketing signup functionality
-        async function handleSignup() {
-            const contactInput = document.getElementById('contact-input');
-            const signupBtn = document.getElementById('signup-btn');
-            const messageDiv = document.getElementById('signup-message');
-            
-            const contact = contactInput.value.trim();
-            
-            if (!contact) {
-                showMessage('Please enter your email or phone number', 'error');
-                return;
-            }
-            
-            // Show loading state
-            signupBtn.disabled = true;
-            signupBtn.textContent = 'Signing up...';
-            
-            try {
-                const response = await fetch('/api/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ contact: contact }),
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showMessage(result.message, 'success');
-                    contactInput.value = ''; // Clear the input
-                } else {
-                    showMessage(result.message, 'error');
-                }
-                
-            } catch (error) {
-                console.error('Signup error:', error);
-                showMessage('Connection error. Please try again.', 'error');
-            }
-            
-            // Reset button state
-            signupBtn.disabled = false;
-            signupBtn.textContent = 'Receive Updates';
-        }
-        
-        function showMessage(message, type) {
-            const messageDiv = document.getElementById('signup-message');
-            messageDiv.textContent = message;
-            messageDiv.className = `signup-message ${type}`;
-            messageDiv.style.display = 'block';
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 5000);
-        }
-        
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadBondData();
-            
-            // Add signup button event listener
-            document.getElementById('signup-btn').addEventListener('click', handleSignup);
-            
-            // Allow Enter key to submit
-            document.getElementById('contact-input').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleSignup();
-                }
-            });
         });
     </script>
 </body>
