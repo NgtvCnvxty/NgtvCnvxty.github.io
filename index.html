@@ -134,16 +134,16 @@
         function populateTable(headers, data) {
             // Populate headers
             const headerRow = document.getElementById('table-headers');
-            headerRow.innerHTML = headers.map(header => `<th>${header || ''}</th>`).join('');
+            headerRow.innerHTML = Object.values(headers).map(header => `<th>${header || ''}</th>`).join('');
             
-            // Populate data
+            // Populate data  
             const tbody = document.getElementById('bond-data');
             tbody.innerHTML = data.map(row => {
-                return `<tr>${row.map((cell, index) => {
+                return `<tr>${Object.values(row).map((cell, index) => {
                     const formattedValue = formatCell(cell, index);
                     
-                    // Apply special styling to 5-Day (bps) column (5th column, index 4)
-                    if (index === 4) {
+                    // Apply special styling to 5-Day (bps) column (6th column, index 5)
+                    if (index === 5) {
                         const numValue = parseFloat(cell);
                         if (Number.isFinite(numValue)) {
                             const className = numValue >= 0 ? 'positive-change' : 'negative-change';
@@ -156,15 +156,15 @@
         }
         
         function loadSampleData() {
-            // Sample data structure for testing
-            const headers = ['Term', 'Yield (%)', 'Price', '1-Day (bps)', '5-Day (bps)'];
+            // Sample data structure for testing (includes tenor column)
+            const headers = ['Tenor', 'Coupon', 'Maturity', 'Price', 'YTM', '5-Day (bps)'];
             const data = [
-                ['2Y', '4.25', '99.80', '-2', '5'],
-                ['3Y', '4.10', '100.15', '1', '-3'],
-                ['5Y', '3.95', '101.20', '3', '8'],
-                ['7Y', '3.85', '102.05', '-1', '-5'],
-                ['10Y', '3.75', '103.10', '2', '12'],
-                ['30Y', '3.90', '104.25', '4', '-8']
+                ['2Y', '4.25', 'Jan-2027', '99.80', '4.30', '5'],
+                ['3Y', '4.10', 'Jan-2028', '100.15', '4.05', '-3'],
+                ['5Y', '3.95', 'Jan-2030', '101.20', '3.85', '8'],
+                ['7Y', '3.85', 'Jan-2032', '102.05', '3.75', '-5'],
+                ['10Y', '3.75', 'Jan-2035', '103.10', '3.65', '12'],
+                ['30Y', '3.90', 'Jan-2055', '104.25', '3.80', '-8']
             ];
             populateTable(headers, data);
         }
