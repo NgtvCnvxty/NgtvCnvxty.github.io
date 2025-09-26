@@ -65,14 +65,22 @@
                 const workbook = XLSX.read(arrayBuffer, {type: 'array'});
                 const worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 
-                // Extract headers and data from B1:F17 using sheet_to_json
+                // Extract all data from A1:F7 and split headers from data
                 const matrix = XLSX.utils.sheet_to_json(worksheet, {
                     header: 1,
-                    range: 'B1:F17'
+                    range: 'A1:F7'
                 });
                 
+                let headers, data;
                 if (matrix.length > 0) {
-                    const [headers, ...data] = matrix;
+                    headers = matrix[0]; // First row is headers
+                    data = matrix.slice(1); // Remaining rows are data
+                } else {
+                    headers = null;
+                    data = [];
+                }
+                
+                if (headers && data.length > 0) {
                     populateTable(headers, data);
                 } else {
                     loadSampleData();
@@ -89,11 +97,14 @@
             if (!value && value !== 0) return '';
             
             switch(columnIndex) {
-                case 0: // First column: Coupon Rate - multiply by 100 for "0.000%" format
+                case 0: // First column: Tenor - display as is
+                    return value;
+                
+                case 1: // Second column: Coupon Rate - multiply by 100 for "0.000%" format
                     const percent1 = parseFloat(value);
                     return Number.isFinite(percent1) ? `${(percent1 * 100).toFixed(3)}%` : value;
                 
-                case 1: // Second column: MMM-YYYY date format
+                case 2: // Third column: MMM-YYYY date format
                     if (value instanceof Date) {
                         return value.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
                     } else if (typeof value === 'number') {
@@ -103,15 +114,15 @@
                     }
                     return value;
                 
-                case 2: // Third column: $000.00 format
+                case 3: // Fourth column: $000.00 format
                     const currency = parseFloat(value);
                     return Number.isFinite(currency) ? `$${currency.toFixed(2)}` : value;
                 
-                case 3: // Fourth column: YTM - multiply by 100 for "0.000%" format
+                case 4: // Fifth column: YTM - multiply by 100 for "0.000%" format
                     const percent2 = parseFloat(value);
                     return Number.isFinite(percent2) ? `${(percent2 * 100).toFixed(3)}%` : value;
                 
-                case 4: // Fifth column: "0.00" format
+                case 5: // Sixth column: "0.00" format
                     const decimal = parseFloat(value);
                     return Number.isFinite(decimal) ? decimal.toFixed(2) : value;
                 
