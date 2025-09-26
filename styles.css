@@ -392,31 +392,53 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .landing-page {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 40px;
+    }
+    
     .landing-wrapper {
         flex-direction: column;
-        gap: 30px;
+        gap: 20px;
         height: auto;
-        padding-bottom: 40px;
+        padding: 20px;
     }
     
     .landing-content {
         max-width: none;
+        text-align: center;
+    }
+    
+    .company-name {
+        font-size: 36px;
+    }
+    
+    .tagline {
+        font-size: 16px;
     }
     
     .bond-panel {
         min-width: auto;
         max-width: none;
         width: 100%;
+        margin: 0;
+        max-height: none;
+    }
+    
+    .bond-panel h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
     }
     
     .bond-table {
-        font-size: 12px;
+        font-size: 11px;
     }
     
     .bond-table th,
     .bond-table td {
-        padding: 8px 4px;
-        font-size: 11px;
+        padding: 6px 3px;
+        font-size: 10px;
     }
 }
 
