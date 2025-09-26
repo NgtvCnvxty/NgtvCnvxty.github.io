@@ -67,8 +67,14 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-// API endpoint to view signups (for admin purposes)
-app.get('/api/signups', async (req, res) => {
+// API endpoint to view signups (protected admin endpoint)
+app.get('/api/admin/signups', async (req, res) => {
+  // Simple admin token check - replace with proper auth in production
+  const adminToken = req.headers.authorization;
+  if (adminToken !== `Bearer ${process.env.ADMIN_TOKEN || 'admin123'}`) {
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  }
+  
   try {
     const result = await pool.query('SELECT * FROM marketing_signups ORDER BY created_at DESC');
     res.json({ success: true, data: result.rows });
