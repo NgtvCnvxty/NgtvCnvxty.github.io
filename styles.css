@@ -43,9 +43,10 @@ body::before {
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
+    gap: 40px;
     padding: 20px 20px;
 }
 
@@ -65,18 +66,16 @@ body::before {
 }
 
 .nav-links {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     list-style: none;
     margin: 0;
     padding: 0;
-    flex: 1 1 auto;
-    min-width: 0;
 }
 
 .nav-links li {
-    flex: 1 1 0;
-    min-width: 0;
+    /* Grid item - no additional styling needed */
 }
 
 .nav-links a {
