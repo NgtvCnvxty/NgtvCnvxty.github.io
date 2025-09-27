@@ -282,9 +282,14 @@ footer {
     }
     
     .nav-links {
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+    
+    .nav-links li {
+        width: 166px;
+        min-width: 166px;
+        max-width: 166px;
     }
     
     .nav-links a {
