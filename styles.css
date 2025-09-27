@@ -66,16 +66,18 @@ body::before {
 }
 
 .nav-links {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    display: flex;
+    gap: 8px;
     list-style: none;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 .nav-links li {
-    /* Grid item - no additional styling needed */
+    width: 166px;
+    min-width: 166px;
+    max-width: 166px;
 }
 
 .nav-links a {
