@@ -70,11 +70,13 @@ body::before {
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .nav-links li {
-    width: calc(20% - 8px);
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .nav-links a {
@@ -92,6 +94,7 @@ body::before {
     text-align: center;
     display: block;
     box-sizing: border-box;
+    white-space: nowrap;
 }
 
 .nav-links a:hover,
