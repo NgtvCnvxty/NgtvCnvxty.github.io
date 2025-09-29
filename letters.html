@@ -17,8 +17,8 @@
             <ul class="nav-links">
                 <li><a href="solutions.html">Solutions</a></li>
                 <li class="dropdown">
-                    <a href="#" onclick="return false;">Markets</a>
-                    <div class="dropdown-content">
+                    <a href="#" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="markets-dropdown" id="markets-toggle">Markets</a>
+                    <div class="dropdown-content" id="markets-dropdown">
                         <a href="gov-canada-nominal.html">Government of Canada Nominal Bonds</a>
                         <a href="gov-canada-rrb.html">Government of Canada Real Return Bonds</a>
                         <a href="convertible-bonds.html">Convertible Bonds</a>
@@ -43,5 +43,59 @@
             <p>&copy; 2025 SD Capital Systems Inc. All rights reserved.</p>
         </footer>
     </div>
+    <script>
+        // Enhanced dropdown functionality with full accessibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.dropdown');
+            const toggle = document.getElementById('markets-toggle');
+            
+            if (dropdown && toggle) {
+                function closeDropdown() {
+                    dropdown.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+                
+                // Click toggle
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const isOpen = dropdown.classList.contains('open');
+                    dropdown.classList.toggle('open');
+                    toggle.setAttribute('aria-expanded', !isOpen);
+                });
+                
+                // Enhanced keyboard support
+                toggle.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggle.click();
+                    }
+                });
+                
+                // Global Escape key handling
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && dropdown.classList.contains('open')) {
+                        closeDropdown();
+                        toggle.focus(); // Return focus to toggle
+                    }
+                });
+                
+                // Close on outside click
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        closeDropdown();
+                    }
+                });
+                
+                // Close when focus leaves dropdown entirely
+                dropdown.addEventListener('focusout', function(e) {
+                    setTimeout(function() {
+                        if (!dropdown.contains(document.activeElement)) {
+                            closeDropdown();
+                        }
+                    }, 10);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
