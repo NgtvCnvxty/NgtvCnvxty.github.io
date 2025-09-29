@@ -102,6 +102,7 @@ body::before {
 .nav-links a.active {
     background: rgba(255,255,255,0.2);
     border-color: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
@@ -183,13 +184,11 @@ body::before {
     white-space: nowrap;
     cursor: pointer;
     font-family: inherit;
-    min-height: 60px; /* GROK */
 }
 
 .dropdown > button:hover {
     background: rgba(255,255,255,0.2);
     border-color: rgba(255,255,255,0.4);
-    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
@@ -825,3 +824,8 @@ table.bond-table td,
     .top-nav {
         animation: none;
     }
+    
+    body::before {
+        background: none;
+    }
+}
