@@ -112,7 +112,6 @@ body::before {
 }
 
 .dropdown-content {
-    display: none;
     position: absolute;
     top: calc(100% + 5px);
     left: 50%;
@@ -129,7 +128,9 @@ body::before {
     padding: 8px 0;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: all 0.3s ease;
+    transform: translateX(-50%) translateY(-10px);
 }
 
 .dropdown-content a {
@@ -159,9 +160,23 @@ body::before {
 .dropdown:hover .dropdown-content,
 .dropdown.open .dropdown-content,
 .dropdown:focus-within .dropdown-content {
-    display: block;
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Add dropdown arrow indicator */
+.dropdown > a::after {
+    content: "▼";
+    font-size: 12px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover > a::after,
+.dropdown.open > a::after {
+    transform: rotate(180deg);
 }
 
 /* Main Content Area */
