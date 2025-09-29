@@ -80,17 +80,6 @@ body::before {
     max-width: 166px;
 }
 
-.nav-links .dropdown {
-    width: 166px;
-    min-width: 166px;
-    max-width: 166px;
-}
-
-.nav-links .dropdown > button {
-    width: 100%;
-    box-sizing: border-box;
-}
-
 .nav-links a {
     color: white;
     text-decoration: none;
