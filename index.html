@@ -40,7 +40,6 @@
         <!-- Bond Data Panel -->
         <div class="bond-panel">
             <h2>Government of Canada Yield Curve</h2>
-            <p id="data-date" class="data-date" style="font-size: 14px; color: #666; margin-top: -10px; margin-bottom: 20px;"></p>
             <div id="loading-state" class="loading-state">
                 <div class="loading-spinner"></div>
                 <p>Loading market data...</p>
@@ -116,19 +115,16 @@
                     throw new Error('No valid date found');
                 }
                 
-                // Update date display
-                const dateElement = document.getElementById('data-date');
-                if (dateElement && latestDate) {
-                    dateElement.textContent = `(as of ${latestDate.toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: '2-digit', 
-                        year: 'numeric' 
-                    })})`;
-                }
+                // Store date for source attribution
+                window.latestDataDate = latestDate ? latestDate.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: '2-digit', 
+                    year: 'numeric' 
+                }) : null;
                 
                 // Extract data for all 7 tenors from the latest date row
                 const tenorOrder = ['2', '3', '5', '7', '10', '30', 'RRB'];
-                const headers = ['Tenor (yrs)', 'Coupon', 'Maturity', 'YTM', 'Price'];
+                const headers = ['Tenor', 'Coupon', 'Maturity', 'YTM', 'Price'];
                 const bondData = [];
                 
                 // Find all rows with the latest date
@@ -183,9 +179,9 @@
             // Column 0: Tenor (yrs) - display as is
             formatted.push(bondRow.tenor || '');
             
-            // Column 1: Coupon - show as percentage (already in percentage form in Excel)
+            // Column 1: Coupon - multiply by 100 and show as percentage
             const coupon = parseFloat(bondRow.coupon);
-            formatted.push(Number.isFinite(coupon) ? `${coupon.toFixed(3)}%` : bondRow.coupon || '');
+            formatted.push(Number.isFinite(coupon) ? `${(coupon * 100).toFixed(3)}%` : bondRow.coupon || '');
             
             // Column 2: Maturity - format as MMM DD, YYYY
             let maturityFormatted = '';
@@ -234,15 +230,19 @@
             
             // Populate data using new formatting function
             const tbody = document.getElementById('bond-data');
-            tbody.innerHTML = bondData.map(bondRow => {
+            const dataRows = bondData.map(bondRow => {
                 const formattedData = formatBondData(bondRow);
                 return `<tr>${formattedData.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
             }).join('');
+            
+            // Add source row after data
+            const sourceRow = `<tr class="source-row"><td colspan="5">Source: Data as of ${window.latestDataDate || 'latest date'} from the Bank of Canada</td></tr>`;
+            tbody.innerHTML = dataRows + sourceRow;
         }
         
         function loadSampleData() {
             // Fallback sample data with new structure
-            const headers = ['Tenor (yrs)', 'Coupon', 'Maturity', 'YTM', 'Price'];
+            const headers = ['Tenor', 'Coupon', 'Maturity', 'YTM', 'Price'];
             const sampleBondData = [
                 { tenor: '2', coupon: 4.25, maturity: 'Jan 27, 2027', ytm: 4.30, price: 99.80 },
                 { tenor: '3', coupon: 4.10, maturity: 'Jan 27, 2028', ytm: 4.05, price: 100.15 },
@@ -253,11 +253,8 @@
                 { tenor: 'RRB', coupon: 1.25, maturity: 'Dec 01, 2031', ytm: 1.85, price: 105.50 }
             ];
             
-            // Update date display for sample data
-            const dateElement = document.getElementById('data-date');
-            if (dateElement) {
-                dateElement.textContent = '(sample data)';
-            }
+            // Store sample date for source attribution
+            window.latestDataDate = 'sample data';
             
             populateTable(headers, sampleBondData);
         }

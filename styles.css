@@ -394,15 +394,17 @@ footer {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    table-layout: fixed;
 }
 
 .bond-table th {
     color: white;
     font-weight: bold;
     padding: 10px 8px;
-    text-align: left;
+    text-align: center;
     border-bottom: 2px solid rgba(255,255,255,0.3);
     font-size: 13px;
+    width: 20%;
 }
 
 .bond-table td {
@@ -410,6 +412,17 @@ footer {
     padding: 10px 8px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     font-size: 13px;
+    text-align: center;
+    width: 20%;
+}
+
+.bond-table .source-row td {
+    color: white;
+    font-size: 12px;
+    padding: 15px 8px 10px 8px;
+    border-bottom: none;
+    text-align: center;
+    font-style: italic;
 }
 
 .bond-table tr:hover {
