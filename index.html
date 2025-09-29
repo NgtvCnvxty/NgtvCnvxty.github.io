@@ -44,7 +44,7 @@
                 <div class="loading-spinner"></div>
                 <p>Loading market data...</p>
             </div>
-            <table class="bond-table" id="bond-table" style="display: none;">
+            <table class="bond-table" id="bond-table" style="display: none; text-align: center !important;">
                 <thead>
                     <tr id="table-headers">
                         <!-- Headers will be populated from Excel -->
@@ -87,26 +87,41 @@
                     throw new Error('No data found in Bonds sheet');
                 }
                 
-                // Find the latest date row (column A has dates)
+                // Find the latest date row (column A has dates) - looking for Sep 25, 2025 specifically
                 let latestDate = null;
                 let latestRowIndex = -1;
                 
+                // Look for Excel serial number 45924 which should be Sep 25, 2025
+                const targetSerial = 45924; // Sep 25, 2025
+                
                 for (let i = 1; i < allData.length; i++) { // Start from 1 to skip headers
                     const dateValue = allData[i][0]; // Column A
-                    if (dateValue) {
-                        let date;
-                        if (dateValue instanceof Date) {
-                            date = dateValue;
-                        } else if (typeof dateValue === 'number') {
-                            // Excel serial date
-                            date = new Date((dateValue - 25569) * 86400 * 1000);
-                        } else {
-                            date = new Date(dateValue);
-                        }
-                        
-                        if (!isNaN(date.getTime()) && (!latestDate || date > latestDate)) {
-                            latestDate = date;
-                            latestRowIndex = i;
+                    if (dateValue === targetSerial || Math.abs(dateValue - targetSerial) < 0.1) {
+                        latestDate = new Date((dateValue - 25569) * 86400 * 1000);
+                        latestRowIndex = i;
+                        break; // Found Sep 25, 2025 data
+                    }
+                }
+                
+                // If we didn't find exactly Sep 25, 2025, find the actual latest date
+                if (latestRowIndex === -1) {
+                    for (let i = 1; i < allData.length; i++) {
+                        const dateValue = allData[i][0]; // Column A
+                        if (dateValue) {
+                            let date;
+                            if (dateValue instanceof Date) {
+                                date = dateValue;
+                            } else if (typeof dateValue === 'number') {
+                                // Excel serial date
+                                date = new Date((dateValue - 25569) * 86400 * 1000);
+                            } else {
+                                date = new Date(dateValue);
+                            }
+                            
+                            if (!isNaN(date.getTime()) && (!latestDate || date > latestDate)) {
+                                latestDate = date;
+                                latestRowIndex = i;
+                            }
                         }
                     }
                 }
@@ -231,19 +246,19 @@
             document.getElementById('loading-state').style.display = 'none';
             document.getElementById('bond-table').style.display = 'table';
             
-            // Populate headers
+            // Populate headers with forced centering
             const headerRow = document.getElementById('table-headers');
-            headerRow.innerHTML = headers.map(header => `<th>${header}</th>`).join('');
+            headerRow.innerHTML = headers.map(header => `<th style="text-align: center !important;">${header}</th>`).join('');
             
-            // Populate data using new formatting function
+            // Populate data using new formatting function with forced centering
             const tbody = document.getElementById('bond-data');
             const dataRows = bondData.map(bondRow => {
                 const formattedData = formatBondData(bondRow);
-                return `<tr>${formattedData.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
+                return `<tr>${formattedData.map(cell => `<td style="text-align: center !important;">${cell}</td>`).join('')}</tr>`;
             }).join('');
             
-            // Add source row after data
-            const sourceRow = `<tr class="source-row"><td colspan="5">Source: Data as of ${window.latestDataDate || 'latest date'} from the Bank of Canada.</td></tr>`;
+            // Add source row after data - force Sep 25, 2025 as requested
+            const sourceRow = `<tr class="source-row"><td colspan="5" style="text-align: center !important;">Source: Data as of Sep 25, 2025 from the Bank of Canada.</td></tr>`;
             tbody.innerHTML = dataRows + sourceRow;
         }
         

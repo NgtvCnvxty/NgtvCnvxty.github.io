@@ -391,6 +391,7 @@ footer {
 }
 
 .bond-table {
+    text-align: center !important;
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
@@ -407,6 +408,11 @@ footer {
     width: 20%;
 }
 
+.bond-table th * {
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
 .bond-table td {
     color: white;
     padding: 10px 8px;
@@ -414,6 +420,25 @@ footer {
     font-size: 13px;
     text-align: center !important;
     width: 20%;
+}
+
+.bond-table td * {
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+/* ABSOLUTE FORCE center alignment */
+table.bond-table,
+table.bond-table *,
+table.bond-table th,
+table.bond-table td,
+.bond-table,
+.bond-table *,
+.bond-table th,
+.bond-table td {
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .bond-table .source-row td {
