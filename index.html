@@ -139,8 +139,8 @@
                         date = new Date(rowDate);
                     }
                     
-                    // Check if this row has the latest date
-                    if (!isNaN(date.getTime()) && Math.abs(date.getTime() - latestDate.getTime()) < 24 * 60 * 60 * 1000) {
+                    // Check if this row has the latest date (same day)
+                    if (!isNaN(date.getTime()) && date.toDateString() === latestDate.toDateString()) {
                         const tenor = String(allData[i][1]); // Column B
                         const coupon = allData[i][2]; // Column C
                         const maturity = allData[i][3]; // Column D
@@ -185,25 +185,31 @@
             
             // Column 2: Maturity - format as MMM DD, YYYY
             let maturityFormatted = '';
-            if (bondRow.maturity) {
+            if (bondRow.maturity !== null && bondRow.maturity !== undefined && bondRow.maturity !== '') {
                 let date;
+                
                 if (bondRow.maturity instanceof Date) {
                     date = bondRow.maturity;
                 } else if (typeof bondRow.maturity === 'number') {
-                    // Excel serial date
+                    // Excel serial date conversion
                     date = new Date((bondRow.maturity - 25569) * 86400 * 1000);
+                } else if (typeof bondRow.maturity === 'string') {
+                    // Try parsing string date
+                    date = new Date(bondRow.maturity);
                 } else {
+                    // Last resort conversion
                     date = new Date(bondRow.maturity);
                 }
                 
-                if (!isNaN(date.getTime())) {
+                if (!isNaN(date.getTime()) && date.getFullYear() > 1900 && date.getFullYear() < 2100) {
                     maturityFormatted = date.toLocaleDateString('en-US', { 
                         month: 'short', 
                         day: '2-digit', 
                         year: 'numeric' 
                     });
                 } else {
-                    maturityFormatted = bondRow.maturity;
+                    // If date parsing fails or gives unreasonable date, display raw value
+                    maturityFormatted = String(bondRow.maturity);
                 }
             }
             formatted.push(maturityFormatted);
