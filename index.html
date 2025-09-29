@@ -40,6 +40,7 @@
         <!-- Bond Data Panel -->
         <div class="bond-panel">
             <h2>Government of Canada Yield Curve</h2>
+            <p id="data-date" class="data-date" style="font-size: 14px; color: #666; margin-top: -10px; margin-bottom: 20px;"></p>
             <div id="loading-state" class="loading-state">
                 <div class="loading-spinner"></div>
                 <p>Loading market data...</p>
@@ -71,28 +72,103 @@
                 
                 // Parse the Excel file with proper options
                 const workbook = XLSX.read(arrayBuffer, {type: 'array'});
-                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                const bondsSheet = workbook.Sheets['Bonds'];
                 
-                // Extract all data from A1:F7 and split headers from data
-                const matrix = XLSX.utils.sheet_to_json(worksheet, {
+                if (!bondsSheet) {
+                    throw new Error('Bonds sheet not found');
+                }
+                
+                // Get all data from Bonds sheet
+                const allData = XLSX.utils.sheet_to_json(bondsSheet, {
                     header: 1,
-                    range: 'A1:F7'
+                    defval: ''
                 });
                 
-                let headers, data;
-                if (matrix.length > 0) {
-                    headers = matrix[0]; // First row is headers
-                    data = matrix.slice(1); // Remaining rows are data
-                } else {
-                    headers = null;
-                    data = [];
+                if (allData.length === 0) {
+                    throw new Error('No data found in Bonds sheet');
                 }
                 
-                if (headers && data.length > 0) {
-                    populateTable(headers, data);
-                } else {
-                    loadSampleData();
+                // Find the latest date row (column A has dates)
+                let latestDate = null;
+                let latestRowIndex = -1;
+                
+                for (let i = 1; i < allData.length; i++) { // Start from 1 to skip headers
+                    const dateValue = allData[i][0]; // Column A
+                    if (dateValue) {
+                        let date;
+                        if (dateValue instanceof Date) {
+                            date = dateValue;
+                        } else if (typeof dateValue === 'number') {
+                            // Excel serial date
+                            date = new Date((dateValue - 25569) * 86400 * 1000);
+                        } else {
+                            date = new Date(dateValue);
+                        }
+                        
+                        if (!isNaN(date.getTime()) && (!latestDate || date > latestDate)) {
+                            latestDate = date;
+                            latestRowIndex = i;
+                        }
+                    }
                 }
+                
+                if (latestRowIndex === -1) {
+                    throw new Error('No valid date found');
+                }
+                
+                // Update date display
+                const dateElement = document.getElementById('data-date');
+                if (dateElement && latestDate) {
+                    dateElement.textContent = `(as of ${latestDate.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: '2-digit', 
+                        year: 'numeric' 
+                    })})`;
+                }
+                
+                // Extract data for all 7 tenors from the latest date row
+                const tenorOrder = ['2', '3', '5', '7', '10', '30', 'RRB'];
+                const headers = ['Tenor (yrs)', 'Coupon', 'Maturity', 'YTM', 'Price'];
+                const bondData = [];
+                
+                // Find all rows with the latest date
+                for (let i = 1; i < allData.length; i++) {
+                    const rowDate = allData[i][0];
+                    let date;
+                    if (rowDate instanceof Date) {
+                        date = rowDate;
+                    } else if (typeof rowDate === 'number') {
+                        date = new Date((rowDate - 25569) * 86400 * 1000);
+                    } else {
+                        date = new Date(rowDate);
+                    }
+                    
+                    // Check if this row has the latest date
+                    if (!isNaN(date.getTime()) && Math.abs(date.getTime() - latestDate.getTime()) < 24 * 60 * 60 * 1000) {
+                        const tenor = String(allData[i][1]); // Column B
+                        const coupon = allData[i][2]; // Column C
+                        const maturity = allData[i][3]; // Column D
+                        const ytm = allData[i][4]; // Column E
+                        const price = allData[i][5]; // Column F
+                        
+                        bondData.push({
+                            tenor: tenor,
+                            coupon: coupon,
+                            maturity: maturity,
+                            ytm: ytm,
+                            price: price
+                        });
+                    }
+                }
+                
+                // Sort data by tenor order
+                bondData.sort((a, b) => {
+                    const aIndex = tenorOrder.indexOf(String(a.tenor));
+                    const bIndex = tenorOrder.indexOf(String(b.tenor));
+                    return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+                });
+                
+                populateTable(headers, bondData);
                 
             } catch (error) {
                 console.error('Error loading bond data:', error);
@@ -101,84 +177,89 @@
             }
         }
         
-        function formatCell(value, columnIndex) {
-            if (!value && value !== 0) return '';
+        function formatBondData(bondRow) {
+            const formatted = [];
             
-            switch(columnIndex) {
-                case 0: // First column: Tenor - display as is
-                    return value;
+            // Column 0: Tenor (yrs) - display as is
+            formatted.push(bondRow.tenor || '');
+            
+            // Column 1: Coupon - show as percentage (already in percentage form in Excel)
+            const coupon = parseFloat(bondRow.coupon);
+            formatted.push(Number.isFinite(coupon) ? `${coupon.toFixed(3)}%` : bondRow.coupon || '');
+            
+            // Column 2: Maturity - format as MMM DD, YYYY
+            let maturityFormatted = '';
+            if (bondRow.maturity) {
+                let date;
+                if (bondRow.maturity instanceof Date) {
+                    date = bondRow.maturity;
+                } else if (typeof bondRow.maturity === 'number') {
+                    // Excel serial date
+                    date = new Date((bondRow.maturity - 25569) * 86400 * 1000);
+                } else {
+                    date = new Date(bondRow.maturity);
+                }
                 
-                case 1: // Second column: Coupon Rate - multiply by 100 for "0.000%" format
-                    const percent1 = parseFloat(value);
-                    return Number.isFinite(percent1) ? `${(percent1 * 100).toFixed(3)}%` : value;
-                
-                case 2: // Third column: MMM-YYYY date format
-                    if (value instanceof Date) {
-                        return value.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-                    } else if (typeof value === 'number') {
-                        // Excel date serial number
-                        const date = new Date((value - 25569) * 86400 * 1000);
-                        return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-                    }
-                    return value;
-                
-                case 3: // Fourth column: $000.00 format
-                    const currency = parseFloat(value);
-                    return Number.isFinite(currency) ? `$${currency.toFixed(2)}` : value;
-                
-                case 4: // Fifth column: YTM - multiply by 100 for "0.000%" format
-                    const percent2 = parseFloat(value);
-                    return Number.isFinite(percent2) ? `${(percent2 * 100).toFixed(3)}%` : value;
-                
-                case 5: // Sixth column: "0.00" format
-                    const decimal = parseFloat(value);
-                    return Number.isFinite(decimal) ? decimal.toFixed(2) : value;
-                
-                default:
-                    return value;
+                if (!isNaN(date.getTime())) {
+                    maturityFormatted = date.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: '2-digit', 
+                        year: 'numeric' 
+                    });
+                } else {
+                    maturityFormatted = bondRow.maturity;
+                }
             }
+            formatted.push(maturityFormatted);
+            
+            // Column 3: YTM - format as percentage with 2 decimal places
+            const ytm = parseFloat(bondRow.ytm);
+            formatted.push(Number.isFinite(ytm) ? `${ytm.toFixed(2)}%` : bondRow.ytm || '');
+            
+            // Column 4: Price - format as currency with dollar sign and 2 decimals
+            const price = parseFloat(bondRow.price);
+            formatted.push(Number.isFinite(price) ? `$${price.toFixed(2)}` : bondRow.price || '');
+            
+            return formatted;
         }
         
-        function populateTable(headers, data) {
+        function populateTable(headers, bondData) {
             // Hide loading state and show table
             document.getElementById('loading-state').style.display = 'none';
             document.getElementById('bond-table').style.display = 'table';
             
             // Populate headers
             const headerRow = document.getElementById('table-headers');
-            headerRow.innerHTML = Object.values(headers).map(header => `<th>${header || ''}</th>`).join('');
+            headerRow.innerHTML = headers.map(header => `<th>${header}</th>`).join('');
             
-            // Populate data  
+            // Populate data using new formatting function
             const tbody = document.getElementById('bond-data');
-            tbody.innerHTML = data.map(row => {
-                return `<tr>${Object.values(row).map((cell, index) => {
-                    const formattedValue = formatCell(cell, index);
-                    
-                    // Apply special styling to 5-Day (bps) column (6th column, index 5)
-                    if (index === 5) {
-                        const numValue = parseFloat(cell);
-                        if (Number.isFinite(numValue)) {
-                            const className = numValue >= 0 ? 'positive-change' : 'negative-change';
-                            return `<td class="${className}">${formattedValue}</td>`;
-                        }
-                    }
-                    return `<td>${formattedValue}</td>`;
-                }).join('')}</tr>`;
+            tbody.innerHTML = bondData.map(bondRow => {
+                const formattedData = formatBondData(bondRow);
+                return `<tr>${formattedData.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
             }).join('');
         }
         
         function loadSampleData() {
-            // Sample data structure for testing (includes tenor column)
-            const headers = ['Tenor', 'Coupon', 'Maturity', 'Price', 'YTM', '5-Day (bps)'];
-            const data = [
-                ['2Y', '4.25', 'Jan-2027', '99.80', '4.30', '5'],
-                ['3Y', '4.10', 'Jan-2028', '100.15', '4.05', '-3'],
-                ['5Y', '3.95', 'Jan-2030', '101.20', '3.85', '8'],
-                ['7Y', '3.85', 'Jan-2032', '102.05', '3.75', '-5'],
-                ['10Y', '3.75', 'Jan-2035', '103.10', '3.65', '12'],
-                ['30Y', '3.90', 'Jan-2055', '104.25', '3.80', '-8']
+            // Fallback sample data with new structure
+            const headers = ['Tenor (yrs)', 'Coupon', 'Maturity', 'YTM', 'Price'];
+            const sampleBondData = [
+                { tenor: '2', coupon: 4.25, maturity: 'Jan 27, 2027', ytm: 4.30, price: 99.80 },
+                { tenor: '3', coupon: 4.10, maturity: 'Jan 27, 2028', ytm: 4.05, price: 100.15 },
+                { tenor: '5', coupon: 3.95, maturity: 'Jan 27, 2030', ytm: 3.85, price: 101.20 },
+                { tenor: '7', coupon: 3.85, maturity: 'Jan 27, 2032', ytm: 3.75, price: 102.05 },
+                { tenor: '10', coupon: 3.75, maturity: 'Jan 27, 2035', ytm: 3.65, price: 103.10 },
+                { tenor: '30', coupon: 3.90, maturity: 'Jan 27, 2055', ytm: 3.80, price: 104.25 },
+                { tenor: 'RRB', coupon: 1.25, maturity: 'Dec 01, 2031', ytm: 1.85, price: 105.50 }
             ];
-            populateTable(headers, data);
+            
+            // Update date display for sample data
+            const dateElement = document.getElementById('data-date');
+            if (dateElement) {
+                dateElement.textContent = '(sample data)';
+            }
+            
+            populateTable(headers, sampleBondData);
         }
         
         // Load data when page loads
