@@ -184,6 +184,7 @@ body::before {
     white-space: nowrap;
     cursor: pointer;
     font-family: inherit;
+    min-height: 40px; /* GROK ADDED
 }
 
 .dropdown > button:hover {
