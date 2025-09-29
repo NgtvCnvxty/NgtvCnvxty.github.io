@@ -169,7 +169,7 @@ body::before {
 .dropdown > button {
     color: white;
     text-decoration: none;
-    padding: 12px 8px;
+    padding: 13px 8px; /* Grok added from 12 to 13 */
     border-radius: 8px;
     font-weight: 500;
     font-size: 15px;
