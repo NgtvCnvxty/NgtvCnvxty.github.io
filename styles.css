@@ -111,11 +111,11 @@ body::before {
     position: relative;
 }
 
-.dropdown-content {
-    position: absolute;
-    top: calc(100% + 5px);
+.top-nav .dropdown-content {
+    position: fixed;
+    top: 70px;
     left: 50%;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%);
     background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
@@ -156,15 +156,13 @@ body::before {
     border-radius: 8px;
 }
 
-.dropdown:hover .dropdown-content,
-.dropdown.open .dropdown-content,
-.dropdown:focus-within .dropdown-content {
-    display: block !important;
+.top-nav .dropdown:hover .dropdown-content,
+.top-nav .dropdown.open .dropdown-content,
+.top-nav .dropdown:focus-within .dropdown-content {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
-    transform: translateX(-50%) translateY(0) !important;
-    z-index: 999999 !important;
+    display: block !important;
 }
 
 /* Style dropdown button like nav links */
