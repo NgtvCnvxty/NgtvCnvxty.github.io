@@ -446,7 +446,6 @@ footer {
     min-width: 500px;
     max-width: 600px;
     max-height: 70vh;
-    overflow-y: auto;
     transform: translateY(20px);
     opacity: 0;
     animation: fadeInUp 1.5s ease 0.3s forwards;
