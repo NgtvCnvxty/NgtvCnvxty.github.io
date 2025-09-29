@@ -47,15 +47,11 @@
             const toggle = document.getElementById('markets-toggle');
             
             if (dropdown && toggle) {
-                // Debug: Check if dropdown content exists
+                // Fix dropdown visibility
                 const dropdownContent = document.querySelector('.dropdown-content');
-                console.log('Dropdown element:', dropdown);
-                console.log('Dropdown content element:', dropdownContent);
                 if (dropdownContent) {
-                    console.log('Dropdown content HTML:', dropdownContent.innerHTML);
                     setTimeout(() => {
                         dropdown.classList.add('open');
-                        // FORCE DROPDOWN VISIBLE WITH JAVASCRIPT
                         dropdownContent.style.display = 'block';
                         dropdownContent.style.opacity = '1';
                         dropdownContent.style.visibility = 'visible';
@@ -65,14 +61,7 @@
                         dropdownContent.style.left = '50%';
                         dropdownContent.style.transform = 'translateX(-50%)';
                         dropdownContent.style.zIndex = '999999';
-                        dropdownContent.style.background = '#228B22';
-                        dropdownContent.style.border = '3px solid red';
-                        dropdownContent.style.padding = '20px';
-                        dropdownContent.style.borderRadius = '12px';
-                        console.log('FORCED DROPDOWN VISIBLE WITH JAVASCRIPT!');
                     }, 1000);
-                } else {
-                    console.log('ERROR: Dropdown content not found!');
                 }
                 
                 function closeDropdown() {

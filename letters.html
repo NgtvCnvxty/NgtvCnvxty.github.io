@@ -50,6 +50,23 @@
             const toggle = document.getElementById('markets-toggle');
             
             if (dropdown && toggle) {
+                // Fix dropdown visibility
+                const dropdownContent = document.querySelector('.dropdown-content');
+                if (dropdownContent) {
+                    setTimeout(() => {
+                        dropdown.classList.add('open');
+                        dropdownContent.style.display = 'block';
+                        dropdownContent.style.opacity = '1';
+                        dropdownContent.style.visibility = 'visible';
+                        dropdownContent.style.pointerEvents = 'auto';
+                        dropdownContent.style.position = 'fixed';
+                        dropdownContent.style.top = '70px';
+                        dropdownContent.style.left = '50%';
+                        dropdownContent.style.transform = 'translateX(-50%)';
+                        dropdownContent.style.zIndex = '999999';
+                    }, 500);
+                }
+                
                 function closeDropdown() {
                     dropdown.classList.remove('open');
                     toggle.setAttribute('aria-expanded', 'false');
