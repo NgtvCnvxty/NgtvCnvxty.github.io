@@ -147,6 +147,7 @@
                         const ytm = allData[i][4]; // Column E
                         const price = allData[i][5]; // Column F
                         
+                        
                         bondData.push({
                             tenor: tenor,
                             coupon: coupon,
@@ -242,7 +243,7 @@
             }).join('');
             
             // Add source row after data
-            const sourceRow = `<tr class="source-row"><td colspan="5">Source: Data as of ${window.latestDataDate || 'latest date'} from the Bank of Canada</td></tr>`;
+            const sourceRow = `<tr class="source-row"><td colspan="5">Source: Data as of ${window.latestDataDate || 'latest date'} from the Bank of Canada.</td></tr>`;
             tbody.innerHTML = dataRows + sourceRow;
         }
         
