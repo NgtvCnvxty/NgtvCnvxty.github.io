@@ -220,7 +220,7 @@
                 if (!isNaN(date.getTime()) && date.getFullYear() > 1900 && date.getFullYear() < 2100) {
                     maturityFormatted = date.toLocaleDateString('en-US', { 
                         month: 'short', 
-                        day: '2-digit', 
+                        day: 'numeric', 
                         year: 'numeric' 
                     });
                 } else {
