@@ -169,7 +169,7 @@ body::before {
 .dropdown > button {
     color: white;
     text-decoration: none;
-    padding: 13px 8px; /* Grok added from 12 to 13 */
+    padding: 12px 8px;
     border-radius: 8px;
     font-weight: 500;
     font-size: 15px;
@@ -814,7 +814,7 @@ table.bond-table td,
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-   
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -825,8 +825,3 @@ table.bond-table td,
     .top-nav {
         animation: none;
     }
-    
-    body::before {
-        background: none;
-    }
-}
