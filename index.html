@@ -91,8 +91,8 @@
                 let latestDate = null;
                 let latestRowIndex = -1;
                 
-                // Look for Excel serial number 45924 which should be Sep 25, 2025
-                const targetSerial = 45924; // Sep 25, 2025
+                // Look for Excel serial number 45925 which should be Sep 25, 2025
+                const targetSerial = 45925; // Sep 25, 2025
                 
                 for (let i = 1; i < allData.length; i++) { // Start from 1 to skip headers
                     const dateValue = allData[i][0]; // Column A
@@ -207,8 +207,8 @@
                 if (bondRow.maturity instanceof Date) {
                     date = bondRow.maturity;
                 } else if (typeof bondRow.maturity === 'number') {
-                    // Excel serial date conversion
-                    date = new Date((bondRow.maturity - 25569) * 86400 * 1000);
+                    // Excel serial date conversion - add 1 day to fix date offset
+                    date = new Date((bondRow.maturity - 25569 + 1) * 86400 * 1000);
                 } else if (typeof bondRow.maturity === 'string') {
                     // Try parsing string date
                     date = new Date(bondRow.maturity);
@@ -257,8 +257,8 @@
                 return `<tr>${formattedData.map(cell => `<td style="text-align: center !important;">${cell}</td>`).join('')}</tr>`;
             }).join('');
             
-            // Add source row after data - force Sep 25, 2025 as requested
-            const sourceRow = `<tr class="source-row"><td colspan="5" style="text-align: center !important;">Source: Data as of Sep 25, 2025 from the Bank of Canada.</td></tr>`;
+            // Add source row after data - force Sep 25, 2025 as requested, left-aligned
+            const sourceRow = `<tr class="source-row"><td colspan="5" style="text-align: left !important;">Source: Data as of Sep 25, 2025 from the Bank of Canada.</td></tr>`;
             tbody.innerHTML = dataRows + sourceRow;
         }
         
