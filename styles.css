@@ -112,25 +112,24 @@ body::before {
 }
 
 .dropdown-content {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    min-width: 320px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    border-radius: 12px;
-    z-index: 2000;
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    padding: 8px 0;
+    position: fixed !important;
+    top: 70px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: linear-gradient(-45deg, #1a4d2e, #2e5c3e, #228B22, #355e3b) !important;
+    background-size: 400% 400% !important;
+    animation: gradientShift 8s ease infinite !important;
+    min-width: 320px !important;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4) !important;
+    border-radius: 12px !important;
+    z-index: 999999 !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    padding: 8px 0 !important;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transition: all 0.3s ease;
-    transform: translateX(-50%) translateY(-10px);
 }
 
 .dropdown-content a {
@@ -157,14 +156,23 @@ body::before {
     border-radius: 8px;
 }
 
-.dropdown:hover .dropdown-content,
-.dropdown.open .dropdown-content,
-.dropdown:focus-within .dropdown-content {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+li.dropdown:hover .dropdown-content,
+li.dropdown.open .dropdown-content,
+li.dropdown:focus-within .dropdown-content,
+.dropdown.open > .dropdown-content,
+.dropdown.open div.dropdown-content,
+.open .dropdown-content {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) !important;
+    z-index: 999999 !important;
+    position: fixed !important;
+    top: 70px !important;
+    left: 50% !important;
+    background: #228B22 !important;
+    border: 3px solid red !important;
 }
 
 /* Style dropdown button like nav links */
