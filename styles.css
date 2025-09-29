@@ -816,6 +816,15 @@ table.bond-table td,
     100% { background-position: 0% 50%; }
 }
 
+/* GROK ADDED
+.nav-links a,
+.dropdown > button {
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
