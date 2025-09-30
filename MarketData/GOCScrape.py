@@ -20,22 +20,17 @@ EXCEL_FILE = 'GOC.xlsx'  # In same MarketData project folder
 ################################################################################
 
 # --- LOAD SPREADSHEET AND TABS ---
-wb = load_workbook(EXCEL_FILE,
-                   data_only=True)  # for getting cell values not formulas
+wb = load_workbook(EXCEL_FILE, data_only=True)  # for getting cell values not formulas
 ws1 = wb['Bonds']
 ws2 = wb['Curve']
 # x = (ws1['A1'].value) # for getting specific cell element
 
 # ---  GET ALL DATES FROM EXCEL COLUMNS AND CALCULATE MAX AND LAST ROW---
-ws1_dates = [
-    cell.value.date() for cell in ws1['A'][1:]
-    if isinstance(cell.value, (datetime, date))
-]  # skip headers
+ws1_dates = [cell.value.date() for cell in ws1['A'][1:]
+             if isinstance(cell.value, (datetime, date))]  # skip headers
 max_date_ws1 = max(ws1_dates)
-ws2_dates = [
-    cell.value.date() for cell in ws2['A'][1:]
-    if isinstance(cell.value, (datetime, date))
-]  # skip headers
+ws2_dates = [cell.value.date() for cell in ws2['A'][1:]
+             if isinstance(cell.value, (datetime, date))]  # skip headers
 max_date_ws2 = max(ws2_dates)
 
 # Check same max dates in file
@@ -114,7 +109,7 @@ if max_date_url > max_date_xlsx:
             print(f"\t(", num, ")", i)
             num += 1
 else:
-    print("ERROR: No Data to Update as Max Date in URL",
+    print("OK: No Data to Update as Max Date in URL",
           max_date_url.strftime("%Y-%m-%d"), "= Max Date in", EXCEL_FILE)
     sys.exit(1)
 
@@ -180,9 +175,7 @@ for bond, yields in filtered_yield_data.items():
 # --- CURVE UPDATE ---
 
 # Filtering dates for those in the URL that will be udpated in EXCEL_FILE (protects for weekends)
-bond_order = [
-    "2-year", "3-year", "5-year", "7-year", "10-year", "30-year", "30-year RRB"
-]
+bond_order = ["2-year", "3-year", "5-year", "7-year", "10-year", "30-year", "30-year RRB"]
 dates_to_update = [d for d in dates if d > max_date_xlsx]
 curve_update = []
 for i, date in enumerate(dates_to_update):
@@ -196,7 +189,6 @@ for row in curve_update:
     formatted_row = [formatted_date] + row[1:]
     print("\t[" + ", ".join([formatted_date] + [str(x)
                                                 for x in row[1:]]) + "]")
-
 # Writing to EXCEL_FILE
 start_row = last_row_ws2 + 1
 
