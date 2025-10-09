@@ -3,11 +3,11 @@
 ################################################################################
 import requests  # for sending get request to URL
 from bs4 import BeautifulSoup  # for parsing URL HTML data
-from openpyxl import load_workbook  # for read/write to Excel
+from openpyxl import load_workbook # for read/write to Excel
+from openpyxl.styles import numbers  # for read/write to Excel
 from datetime import datetime, date, timedelta  # for dates
 import sys  # for exit if failed tests
 import re
-
 
 ################################################################################
 ### CONSTANTS
@@ -27,11 +27,9 @@ ws2 = wb['Curve']
 # x = (ws1['A1'].value) # for getting specific cell element
 
 # ---  GET ALL DATES FROM EXCEL COLUMNS AND CALCULATE MAX AND LAST ROW---
-ws1_dates = [cell.value.date() for cell in ws1['A'][1:]
-             if isinstance(cell.value, (datetime, date))]  # skip headers
+ws1_dates = [cell.value.date() for cell in ws1['A'][1:] if isinstance(cell.value, (datetime, date))]  # skip headers
 max_date_ws1 = max(ws1_dates)
-ws2_dates = [cell.value.date() for cell in ws2['A'][1:]
-             if isinstance(cell.value, (datetime, date))]  # skip headers
+ws2_dates = [cell.value.date() for cell in ws2['A'][1:] if isinstance(cell.value, (datetime, date))]  # skip headers
 max_date_ws2 = max(ws2_dates)
 
 # Check same max dates in file
@@ -45,11 +43,8 @@ else:
     sys.exit(1)
 
 # Last row of each tab that contains data
-last_row_ws1 = max(i for i, cell in enumerate(ws1['A'][1:], start=2)
-                   if cell.value is not None)
-
-last_row_ws2 = max(i for i, cell in enumerate(ws2['A'][1:], start=2)
-                   if cell.value is not None)
+last_row_ws1 = max(i for i, cell in enumerate(ws1['A'][1:], start=2) if cell.value is not None)
+last_row_ws2 = max(i for i, cell in enumerate(ws2['A'][1:], start=2) if cell.value is not None)
 
 ################################################################################
 ### SCRAPING BOC WEB DATA
@@ -137,8 +132,7 @@ for i, j in zip(row_indices, bond_types):
     yields = []
     for cell in cells:
         text = cell.text.strip()
-        yields.append(float(text) if text else
-                      None)  # Use None for empty cells; adjust as needed
+        yields.append(float(text) if text else None)  # Use None for empty cells; adjust as needed
     # Create dictionary entry with bond as key and yields list as value
     yield_data[j] = yields
 # yield_data has keys as in bond_types
@@ -156,8 +150,9 @@ for bond, yields in yield_data.items():
 # --- FILTERING SCRAPED DATA FOR EXCEL_FILE UPDATE ---
 
 # Filtering yield dictionary to remove values for dates < max_date_xlsx
-index_max_date = dates.index(max_date_xlsx) + 1  # Indices for which will keep data in dictionary for update
-filtered_yield_data = {key: value[index_max_date:] for key, value in yield_data.items()}
+# Filter yield_data for only dates > max_date_xlsx
+dates_to_keep = [i for i, d in enumerate(dates) if d > max_date_xlsx]
+filtered_yield_data = {bond: [yields[i] for i in dates_to_keep] for bond, yields in yield_data.items()}
 print("OK: Filtered Yield Data at URL to Update in", EXCEL_FILE)
 for bond, yields in filtered_yield_data.items():
     print(f"\t{bond}: {yields}")
@@ -255,7 +250,9 @@ for i, date in enumerate(dates_to_update):
 for i, row in enumerate(bonds_update):
     excel_row = start_row_bonds + i
     for j, val in enumerate(row, start=1):  # Columns A to E
-        ws1.cell(row=excel_row, column=j, value=val)
+        cell = ws1.cell(row=excel_row, column=j, value=val)
+        if j == 3:
+            cell.number_format = '0.00'  # force plain 2-decimal number format
 
 # Print bonds update data
 print("UPDATE: Data in BONDS")
@@ -276,8 +273,8 @@ expected_curve_rows = last_row_ws2 + len(dates_to_update)
 new_ws1_rows: int = max(i for i, cell in enumerate(ws1['A'][1:], start=2) if cell.value is not None)
 new_ws2_rows: int = max(i for i, cell in enumerate(ws2['A'][1:], start=2) if cell.value is not None)
 
-print(f"VERIFY: Curve tab rows → Expected: {expected_curve_rows}, Actual: {new_ws1_rows}")
-print(f"VERIFY: Bonds tab rows → Expected: {expected_bonds_rows}, Actual: {new_ws2_rows}")
+print(f"VERIFY: Bonds tab rows → Expected: {expected_bonds_rows}, Actual: {new_ws1_rows}")
+print(f"VERIFY: Curve tab rows → Expected: {expected_curve_rows}, Actual: {new_ws2_rows}")
 
 # --- SAVE FILE ---
 wb.save(EXCEL_FILE)
